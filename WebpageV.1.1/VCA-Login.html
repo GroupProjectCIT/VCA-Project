@@ -4,6 +4,8 @@
 	<title>
 		VCA/login
 	</title>
+	<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+	
 	<link rel="stylesheet" type="text/css" href="VCA-STYLE.css">
 </head>
 
@@ -11,26 +13,36 @@
 
 <html>
 	<body>
-		<script src="VCA-JavaScript.js"></script>
 		
 		<header>
+			<div id= "navTabsArea">
+				<a draggable="false" >Home </a>
+				<a draggable="false" >Location </a>
+				<a draggable="false" >Patient-List </a>
+				<a draggable="false" >Account </a>
+				<!-- <a  id="logOutBtn" draggable="false" href="VCA-Login.html" > Log out </a> -->
+				<button id="logOutBtn">Logout</button>
+			</div>
+				
+			</div>
+			
 			<div id="logo">
 				
 			</div>
 		</header>
 		
 		<div id="loginForm">
-			<form action="VCA-Home.html">
-				<p id="loginLabel" action='login'>
-					Username:
-				</p>
-				<input type="text" name="username">
-				<p id="loginLabel">
-					Password:
-				</p>
-				<input type="password" name="password">
-				<input id="loginBtn" type="submit" value="Login">
-			</form>
+			
+				<p id="loginLabel">Email:</p>
+				
+				<input id="emailInput" type="email" name="email">
+				
+				<p id="loginLabel">Password:</p>
+				
+				<input id="passwordInput" type="password" name="password">
+				
+				<button id="logInBtn">Log in</button>
+			
 		</div>
 		
 		
@@ -40,6 +52,8 @@
 				<a href="VCA-Contact.html">Contact</a>
 			</div>
 		</footer>
+		
+		<script src="VCA-JavaScript.js"></script>
 	</body>
 </html>
 

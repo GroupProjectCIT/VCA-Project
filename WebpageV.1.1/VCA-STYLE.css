@@ -34,6 +34,16 @@ header a
 	margin:5px;
 }
 
+#navTabsArea button
+{
+	background-color:transparent;
+	border:none;
+	color:white;
+	text-decoration: none;
+	font-family:"lucida","arial";
+	font-size:150%;
+}
+
 #logo
 {
 	position:absolute;
@@ -92,22 +102,13 @@ footer a
 	font-size:80%;
 }
 
-#info
+
+#info/*footer links*/
 {
 	position:absolute;
 	top:50%;
 	left:47.5%;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
