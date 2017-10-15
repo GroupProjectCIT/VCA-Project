@@ -67,8 +67,7 @@
 				// User is signed in go to home page
 				window.location = "VCA-Home.html";
 			}
-					
-			
+				
 			//logs to console user info
 			console.log(user);
 			
