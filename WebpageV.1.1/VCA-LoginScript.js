@@ -56,8 +56,18 @@
 		//var user = firebase.auth().currentUser;
 		if (user) 
 		{
-			// User is signed in go to home page
-			window.location = "VCA-Home.html";		
+			
+			if(user.email.includes("admin"))
+			{
+				// admin is signed in go to admin page
+				window.location = "VCA-Admin.html";
+			}
+			else
+			{
+				// User is signed in go to home page
+				window.location = "VCA-Home.html";
+			}
+					
 			
 			//logs to console user info
 			console.log(user);
