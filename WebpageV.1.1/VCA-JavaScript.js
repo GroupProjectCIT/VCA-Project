@@ -1,6 +1,6 @@
 (function()
 {
-	alert("onStart function");
+	//alert("onStart function");
 	
 	//code from firebase
 	// Initialize Firebase
@@ -51,7 +51,7 @@
 
 function logOut()
 {
-		alert("logOut function");
+		//alert("logOut function");
 		//go to login page
 		window.location.href = "VCA-Login.html"
 }
