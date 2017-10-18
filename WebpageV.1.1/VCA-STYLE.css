@@ -42,6 +42,7 @@ header a
 	text-decoration: none;
 	font-family:"lucida","arial";
 	font-size:150%;
+	
 }
 
 #logo
@@ -165,12 +166,34 @@ footer a
 #addUsersArea
 {
 	position:absolute;
-	top:25%;
-	left:20%;
-	right:20%;
-	height:50%;
-	background-color:gray;
+	top:20%;
+	left:42.5%;
+	height:65%;
+	width:20%;
+	/*background-color:gray;*/
+	font-family:"lucida","arial";
 	
+}
+
+#accTypeRadios
+{
+	/*background-color:red;*/
+	margin:1%;
+}
+
+#addUsersArea input 
+{
+	margin-top:0%;
+	margin-left:0%;
+	margin-bottom:15px;
+	
+}
+
+#addUsersArea p
+{
+	margin-top:10px;
+	margin-left:0%;
+	margin-bottom:0%;
 }
 
 
