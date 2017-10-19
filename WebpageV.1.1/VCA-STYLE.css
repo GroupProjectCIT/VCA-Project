@@ -38,6 +38,7 @@ header a
 {
 	background-color:transparent;
 	border:none;
+	outline:none;
 	color:white;
 	text-decoration: none;
 	font-family:"lucida","arial";

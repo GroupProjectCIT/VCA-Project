@@ -41,6 +41,7 @@
 			
 			//logs to console a message
 			console.log("user logedOut/not logged in...thx obama!");
+		
 		}
 	});
 	
