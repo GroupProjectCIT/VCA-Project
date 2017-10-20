@@ -1,65 +1,69 @@
 <!DOCTYPE html>
 
 <head>
-	<title>
-		VCA/ABOUT
-	</title>
-	
-	<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+    <title>
+        VCA/ABOUT
+    </title>
 
-	<link rel="stylesheet" type="text/css" href="VCA-STYLE.css">
+    <link rel="stylesheet" type="text/css" href="VCA-STYLE.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+
 </head>
 
-
-
 <html>
-	<body>
-		
-		
-		<header>
-			<div id= "navTabsArea">
-				<a draggable="false" href="VCA-Home.html">Home </a>
-				<a draggable="false" href="VCA-Location.html">Location </a>
-				<a draggable="false" href="VCA-PatientList.html">Patient-List </a>
-				<a draggable="false" href="VCA-Account.html">Account </a>
-				<button id="logOutBtn" onclick="logOut()">Logout</button>
-			</div>
-			
-			<a draggable="false" href="VCA-Home.html">
-				<div id="logo">
-					
-				</div>
-			</a>
-		</header>
-		
-		<div id="aboutText">
-			<h1>About Us:</h1><b>Virtual Care Assistant (VCA)</b><br>
-			With advances in modern medicine, less people in the developed 
-			world are dying from the traditional killers of heart disease and cancer. 
-			As a consequence, people are now living longer. However the benefits of 
-			old age has brought new challenges and we have witnessed an explosion 
-			in the incidence of Alzheimer's and dementia. In America alone, it is 
-			estimated that 5.5 million people are currently living with the disease.
-			<br><br>
-			We provide a traditional service of providing human care assistants to the elderly.
-			Our website acts as a control centre for companies involved in the provision of 
-			in-home care.<br>
-			On our app, it is more than a tool, but is more like a friend.
-			It is always there for the user. It can help you stay focused with activities
-			like memory skills, calendar playback, location aware and much more.
-			<br><br>
-			If you have any further questions, don't hesitate to visit our contact page
-			below and send us a message.
-			
+<body>
 
-		</div>
-		
-		<footer>
-			<div id="info">
-				<a href="VCA-About.html">About</a>
-				<a href="VCA-Contact.html">Contact</a>
-			</div>
-		</footer>
-		<script src="VCA-JavaScript.js"></script>
-	</body>
+<header class="clearfix">
+    <div class="container">
+        <a href="VCA-Home.html">
+            <div class="header-left">
+            </div></a>
+        <div class="header-right">
+            <label for="open">
+                <span class="hidden-desktop"></span>
+            </label>
+            <input type="checkbox" name="" id="open">
+            <nav>
+                <a href="VCA-Home.html">Home</a>
+                <a href="VCA-Location.html">Location</a>
+                <a href="VCA-PatientList.html">Patient List</a>
+                <a href="VCA-Account.html">Account</a>
+                <button id="logOutBtn">Logout</button>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div id="aboutText">
+    <h1>About Us:</h1><b>Virtual Care Assistant (VCA)</b><br>
+    With advances in modern medicine, less people in the developed
+    world are dying from the traditional killers of heart disease and cancer.
+    As a consequence, people are now living longer. However the benefits of
+    old age has brought new challenges and we have witnessed an explosion
+    in the incidence of Alzheimer's and dementia. In America alone, it is
+    estimated that 5.5 million people are currently living with the disease.
+    <br><br>
+    We provide a traditional service of providing human care assistants to the elderly.
+    Our website acts as a control centre for companies involved in the provision of
+    in-home care.<br>
+    On our app, it is more than a tool, but is more like a friend.
+    It is always there for the user. It can help you stay focused with activities
+    like memory skills, calendar playback, location aware and much more.
+    <br><br>
+    If you have any further questions, don't hesitate to visit our contact page
+    below and send us a message.
+
+
+</div>
+
+<footer>
+    <div id="info">
+        <a href="VCA-About.html">About</a>
+        <a href="VCA-Contact.html">Contact</a>
+    </div>
+</footer>
+<script src="VCA-JavaScript.js"></script>
+</body>
 </html>

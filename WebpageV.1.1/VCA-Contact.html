@@ -1,86 +1,88 @@
 <!DOCTYPE html>
 
 <head>
-	<title>
-		VCA/CONTACT
-	</title>
-	
-	<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+    <title>
+        VCA/CONTACT
+    </title>
+    <link rel="stylesheet" type="text/css" href="VCA-STYLE.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
 
-	<link rel="stylesheet" type="text/css" href="VCA-STYLE.css">
 </head>
 
-
-
 <html>
-	<body>
-		
-		
-		<header>
-			<div id= "navTabsArea">
-				<a draggable="false" href="VCA-Home.html">Home </a>
-				<a draggable="false" href="VCA-Location.html">Location </a>
-				<a draggable="false" href="VCA-PatientList.html">Patient-List </a>
-				<a draggable="false" href="VCA-Account.html">Account </a>
-				<button id="logOutBtn" onclick="logOut()">Logout</button>
-			</div>
-			
-			<a draggable="false" href="VCA-Home.html">
-				<div id="logo">
-					
-				</div>
-			</a>
-		</header>
-		
-		<div id="contactText">
-		<h1>Contact Us:</h1>
-		<h2>Administor's</h2>
-		<b>Adrian Poznan</b><br> Email Address: <a href="adrian.poznan@mycit.ie">adrian.poznan@mycit.ie</a><br><br>
-		<b>Darragh Finn</b><br> Email Address: <a href="darragh.finn@mycit.ie">darragh.finn@mycit.ie</a><br><br>
-		<b>Jack Hickey</b><br> Email Address: <a href="jack.hickey@mycit.ie">jack.hickey@mycit.ie</a><br><br>
-		<b>Shane Marshall</b><br> Email Address: <a href="shane.marshall@mycit.ie">shane.marshall@mycit.ie</a>
-		</div>
-		
-		<div id="msgText">
+<body>
 
-        <h2>Send Us A Message:</h2>
-		<div class="fName">
-            <label for="fName" class="required">First Name:</label>
-            <input type="text" placeholder="Enter your first name" name="fName" id="boxes" required title="Please enter your first name">
-          </div>
-          <div class="lName">
-            <label for="lName" class="required">Last Name:</label>
-            <input type="text" placeholder="Enter your last name" name="lName" id="boxes" required title="Please enter your last name">
-          </div>
-          <div class="email">
-            <label for="email" class="required">Email:</label>
-            <input type="text" placeholder="you@example.com" name="email" id="boxes" required>
-          </div>
-          <div class="subject">
-            <label for="subject" class="subject">Subject:</label>
-            <input type="text" name="subject" id="boxes" required>
-          </div>
-          <div class="message">
-            <label for="message">Your Message:</label>
-            <textarea name="message" id="message" rows="5" cols="30"></textarea>
-            <span id="message-count" class="hide"></span>
-          </div>
-          <div class="send"><input type="submit" value="Send"></div>
-     	 </div>
-        </fieldset>
-      </div>
-      
-   		 </form>
- 			 </div>
-			</p>
-		</div>
-		
-		<footer>
-			<div id="info">
-				<a href="VCA-About.html">About</a>
-				<a href="VCA-Contact.html">Contact</a>
-			</div>
-		</footer>
-		<script src="VCA-JavaScript.js"></script>
-	</body>
+<header class="clearfix">
+    <div class="container">
+        <a href="VCA-Home.html">
+            <div class="header-left">
+            </div></a>
+        <div class="header-right">
+            <label for="open">
+                <span class="hidden-desktop"></span>
+            </label>
+            <input type="checkbox" name="" id="open">
+            <nav>
+                <a href="VCA-Home.html">Home</a>
+                <a href="VCA-Location.html">Location</a>
+                <a href="VCA-PatientList.html">Patient List</a>
+                <a href="VCA-Account.html">Account</a>
+                <a href="VCA-Login.html">Logout</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div id="contactText">
+    <h1>Contact Us:</h1>
+    <h2>Administrator's</h2>
+    <b>Adrian Poznan</b><br> Email Address: <a href="adrian.poznan@mycit.ie">adrian.poznan@mycit.ie</a><br><br>
+    <b>Darragh Finn</b><br> Email Address: <a href="darragh.finn@mycit.ie">darragh.finn@mycit.ie</a><br><br>
+    <b>Jack Hickey</b><br> Email Address: <a href="jack.hickey@mycit.ie">jack.hickey@mycit.ie</a><br><br>
+    <b>Shane Marshall</b><br> Email Address: <a href="shane.marshall@mycit.ie">shane.marshall@mycit.ie</a>
+</div>
+
+<div id="msgText">
+
+    <h2>Send Us A Message:</h2>
+    <div class="fName">
+        <label for="fName" class="required">First Name:</label>
+        <input type="text" placeholder="Enter your first name" name="fName" id="boxes" required title="Please enter your first name">
+    </div>
+    <div class="lName">
+        <label for="lName" class="required">Last Name:</label>
+        <input type="text" placeholder="Enter your last name" name="lName" id="boxes" required title="Please enter your last name">
+    </div>
+    <div class="email">
+        <label for="email" class="required">Email:</label>
+        <input type="text" placeholder="you@example.com" name="email" id="boxes" required>
+    </div>
+    <div class="subject">
+        <label for="subject" class="subject">Subject:</label>
+        <input type="text" name="subject" id="boxes" required>
+    </div>
+    <div class="message">
+        <label for="message">Your Message:</label>
+        <textarea name="message" id="message" rows="5" cols="30"></textarea>
+        <span id="message-count" class="hide"></span>
+    </div>
+    <div class="send"><input type="submit" value="Send"></div>
+</div>
+</fieldset>
+</div>
+
+</form>
+</div>
+</p>
+</div>
+
+<footer>
+    <div id="info">
+        <a href="VCA-About.html">About</a>
+        <a href="VCA-Contact.html">Contact</a>
+    </div>
+</footer>
+</body>
 </html>

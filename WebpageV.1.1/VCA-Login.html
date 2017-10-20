@@ -1,59 +1,60 @@
 <!DOCTYPE html>
 
 <head>
-	<title>
-		VCA/login
-	</title>
-	<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
-	
-	<link rel="stylesheet" type="text/css" href="VCA-STYLE.css">
+    <title>
+        VCA/login
+    </title>
+    <link rel="stylesheet" type="text/css" href="VCA-STYLE.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+
 </head>
 
-
-
 <html>
-	<body>
-		
-		<header>
-			<div id= "navTabsArea">
-				<a draggable="false" >Home </a>
-				<a draggable="false" >Location </a>
-				<a draggable="false" >Patient-List </a>
-				<a draggable="false" >Account </a>
-				<button id="logOutBtn">Logout</button>
-			</div>
-				
-			</div>
-			
-			<div id="logo">
-				
-			</div>
-		</header>
-		
-		<div id="loginForm">
-			
-				<p id="loginLabel">Email:</p>
-				
-				<input id="emailInput" type="email" name="email">
-				
-				<p id="loginLabel">Password:</p>
-				
-				<input id="passwordInput" type="password" name="password">
-				
-				<button id="logInBtn">Log in</button>
-			
-		</div>
-		
-		
-		<footer>
-			<div id="info">
-				<!--<a href="VCA-About.html">About</a>
-				<a href="VCA-Contact.html">Contact</a> -->
-			</div>
-		</footer>
-		
-		<script src="VCA-LoginScript.js"></script>
-	</body>
-</html>
+<body>
 
+<header>
+    <div class="container">
+        <a href="VCA-Home.html">
+            <div class="header-left">
+            </div></a>
+
+        <div class="header-right">
+            <label for="open">
+                <span class="hidden-desktop"></span>
+            </label>
+            <input type="checkbox" name="" id="open">
+            <nav>
+                <a draggable="false" >Home </a>
+                <a draggable="false" >Location </a>
+                <a draggable="false" >Patient List </a>
+                <a draggable="false" >Account </a>
+                <button id="logOutBtn">Logout</button>
+            </nav>
+        </div>
+</header>
+
+<div id="loginForm">
+
+        <p id="loginLabel">Email:</p>
+
+        <input id="emailInput" type="email" name="email">
+
+        <p id="loginLabel">Password:</p>
+
+        <input id="passwordInput" type="password" name="password">
+
+        <button id="logInBtn">Log in</button>
+</div>
+
+<footer>
+    <div id="info">
+        <!--<a href="VCA-About.html">About</a>
+		<a href="VCA-Contact.html">Contact</a> -->
+    </div>
+</footer>
+<script src="VCA-LoginScript.js"></script>
+</body>
+</html>
 

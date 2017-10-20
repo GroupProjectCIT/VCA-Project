@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 
 <head>
-	<title>
-		VCA/ADMIN
-	</title>
-	
-	<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+    <title>
+        VCA/ADMIN
+    </title>
 
-	<link rel="stylesheet" type="text/css" href="VCA-STYLE.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="VCA-STYLE.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+
 </head>
 
 
 
 <html>
-	<body>
-		
-		
-		<header>
-			<div id= "navTabsArea">
-				<a draggable="false" href="VCA-Admin.html">Tables</a>
-				<a draggable="false" href="VCA-Admin-Add.html">Add</a>
-				<button id="logOutBtn" onclick="logOut()">Logout</button>
-				
-			</div>
-			
-			<div id="logo">
-			</div>
-		</header>
-		
-		
-		
-		<footer>
-		</footer>
-		<script src="VCA-JavaScript.js"></script>
-	</body>
+<body>
+
+<header>
+    <div class="container">
+        <a href="VCA-Home.html">
+            <div class="header-left">
+            </div></a>
+
+        <div class="header-right">
+            <label for="open">
+                <span class="hidden-desktop"></span>
+            </label>
+            <input type="checkbox" name="" id="open">
+            <nav>
+                <a draggable="false" href="VCA-Admin.html">Tables</a>
+                <a draggable="false" href="VCA-Admin-Add.html">Add</a>
+                <button id="logOutBtn" onclick="logOut()">Logout</button>
+            </nav>
+        </div>
+</header>
+
+<footer>
+</footer>
+<script src="VCA-JavaScript.js"></script>
+</body>
 </html>

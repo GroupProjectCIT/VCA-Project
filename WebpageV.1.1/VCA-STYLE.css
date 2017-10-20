@@ -1,296 +1,280 @@
 
-
-header
-{
-	position:absolute;
-	top:0px;
-	left:0px;
-	height:150px;
-	width:100%;
-	background-color:#3377ff;
+/*-------BOOTSTRAP NAVBAR CSS-----------*/
+header{
+    width: 100%;
+    height:150px;
+    background-color:#3377ff;
 }
 
-header a
-{
-	color:white;
-	text-decoration: none;
-	font-family:"lucida","arial";
-	font-size:150%;
+.header-left{
+    position: absolute;
+    height:150px;
+    top:0%;
+    left:150px;
+    width:149px;
+    background-image: url("VCA-LOGOv6.png");
+    background-repeat: no-repeat;
 }
 
-#navTabsArea
-{
-	position:absolute;
-	left:50%;
-	bottom:5%;
-	width:600px;
-	/*background-color:gray;*/
-	height:20px;
-	
+.header-right label{
+    top: -3.7em;
+    right: 0;
+    cursor: pointer;
+}
+.header-right span{
+    position: relative;
+    width: 2em;
+    height: 2em;
+    background: rgba(255,255,255,.3);
+    -webkit-transition: all .3s ease;
+}
+.header-right span:hover{
+    background: rgba(255,255,255,.6);
+}
+.header-right span:before,
+.header-right span:after{
+    content: '';
+    position: absolute;
+    width: 2em;
+    height: .5em;
+    top: 4px;
+    left: 0;
+    background: black;
+}
+.header-right span:after{
+    top: 14px;
+}
+.header-right{
+    text-align: right;
+    margin-top: 80px;/*Height of top tabs*/
+}
+#open{
+    display: none;
+}
+h1 {
+    font-weight: 300;
+    line-height: 40px;
+}
+nav>a{
+    position: relative;
+    display: inline-block;
+    font-size: 20px;
+    line-height: 50px;/*Height of hover*/
+    padding: 0 1em;
+    -webkit-transition: all .3s ease;
+    color: white;
+}
+nav>a:hover{
+    background: rgba(255,255,255,.9);
+    color: black;
+}
+.hidden-desktop{
+    display: none;
 }
 
-#navTabsArea a
-{
-	margin:5px;
-}
-
-#navTabsArea button
-{
-	background-color:transparent;
-	border:none;
-	outline:none;
-	color:white;
-	text-decoration: none;
-	font-family:"lucida","arial";
-	font-size:150%;
-	
-}
-
-#logo
-{
-	position:absolute;
-	top:0%;
-	left:150px;
-	height:150px;
-	width:149px;
-	background-image: url("graphics/VCA-LOGOv6.png");
-	
-}
-
-
+/*---------ADRIAN'S CSS------------*/
 
 #loginForm
 {
-	position:absolute;
-	top:40%;
-	left:45%;
-	height:250px;
-	width:200px;
+    position:absolute;
+    top:40%;
+    left:45%;
+    height:250px;
+    width:200px;
 }
 
 #loginLabel
 {
-	color:black;
-	text-decoration: none;
-	font-family:"lucida","arial";
-	font-size:80%;
-	margin:0px;
+    color:black;
+    text-decoration: none;
+    font-size:80%;
+    margin:0px;
 }
 
 #loginBtn
 {
-
-	height:30px;
-	width:173px;
+    height:30px;
+    width:162px;
 }
-
 
 
 footer
 {
-	position:absolute;
-	bottom:0px;
-	left:0px;
-	width:100%;
-	height:70px;
-	background-color:#3377ff;
+    position:absolute;
+    bottom:0px;
+    left:0px;
+    width:100%;
+    height:70px;
+    background-color:#3377ff;
 }
 
 footer a
 {
-	color:white;
-	text-decoration: none;
-	font-family:"lucida","arial";
-	font-size:80%;
+    color:white;
+    text-decoration: none;
+    font-size:80%;
 }
 
-
-#info/*footer links*/
-{
-	position:absolute;
-	top:50%;
-	left:47.5%;
-}
-
-
-
-/*JACK=================================================================================================================*/
-
-#googleMap
-{
-	position: absolute;
-	right: 35%;
-	top: 20%;
-	left: 10%;
-	width: auto;
-	border: 3px solid #7aadff;
-	padding: 250px;
-
-}
-/*JACK=================================================================================================================*/
-
-/*ADRIAN===============================================================================================================*/
 #userInfo
 {
-	position:absolute;
-	top:150px;
-	left:5%;
-	height:77%;
-	width:50%;
-	font-family:"lucida","arial";
-
+    position:absolute;
+    top:150px;
+    left:55%;
+    height:77%;
+    width:50%;
+    font-family:"lucida","arial";
 }
-
 
 #details
 {
-	position:absolute;
-	top:100px;
-	left:50px;
-	height:300px;
-	width:300px;
-	font-size:110%;
-	
+    position:absolute;
+    top:100px;
+    left:50px;
+    height:300px;
+    width:300px;
+    font-size:110%;
 }
 
 #preferences
 {
-	position:absolute;
-	top:150px;
-	right:0px;
-	height:77%;
-	width:50%;
-	font-family:"lucida","arial";
+    position:absolute;
+    top:150px;
+    right:0px;
+    height:77%;
+    left:50%;
+    font-family:"lucida","arial";
 }
 
 
 #addUsersArea
 {
-	position:absolute;
-	top:20%;
-	left:42.5%;
-	height:65%;
-	width:20%;
-	/*background-color:gray;*/
-	font-family:"lucida","arial";
-	
+    position:absolute;
+    top:20%;
+    left:42.5%;
+    height:65%;
+    width:20%;
+    /*background-color:gray;*/
+    font-family:"lucida","arial";
+
 }
 
 #accTypeRadios
 {
-	/*background-color:red;*/
-	margin:1%;
+    /*background-color:red;*/
+    margin:1%;
 }
 
-#addUsersArea input 
+#addUsersArea input
 {
-	margin-top:0%;
-	margin-left:0%;
-	margin-bottom:15px;
-	
+    margin-top:0%;
+    margin-left:0%;
+    margin-bottom:15px;
+
 }
 
 #addUsersArea p
 {
-	margin-top:10px;
-	margin-left:0%;
-	margin-bottom:0%;
+    margin-top:10px;
+    margin-left:0%;
+    margin-bottom:0%;
 }
 
+/*---------DARRAGH'S CSS------------*/
 
-
-/*ADRIAN===============================================================================================================*/
-
-/*SHANE================================================================================================================*/
-
-table 
+#info
 {
-	width:70%;
-	border: 2px solid #3377ff;
-	margin-top: 200px;
-	margin-left: auto;
-	margin-right: auto;
-	border-collapse: collapse;
+    position:absolute;
+    top:50%;
+    left:47.5%;
 }
-
-th, td
-{
-    padding: 7px;
-}
-
-th 
-{
-	border-bottom: 2px solid  #3377ff;
-	border-right: 1px solid  #3377ff;
-}
-
-td 
-{
-	border: 1px solid  #3377ff;
-}
-
-/*SHANE=================================================================================================================*/
-
-/*DARRAGH===============================================================================================================*/
 
 #aboutText
 {
-	position:absolute;
-	top:25%;
-	left:30%;
-	Width:450px;
-	height:300px;
+    position:absolute;
+    top:25%;
+    left:30%;
+    Width:450px;
+    height:300px;
 }
 
 #msgText
 {
-	position:absolute;
-	top:25%;
-	right:20%;
-	Width:300px;
-	height:300px;
+    position:absolute;
+    top:25%;
+    right:20%;
+    Width:300px;
+    height:300px;
 }
 
 #contactText
 {
-	position:absolute;
-	top:25%;
-	left:10%;
-	Width:300px;
-	height:300px;
+    position:absolute;
+    top:25%;
+    left:10%;
+    Width:300px;
+    height:300px;
 }
 
-input[type="text"] 
+#msgText input[type="text"] {
+    width: 160px;
+    border: 1px solid #d6d6d6;
+    padding: 2px;
+    margin:10px;
+    outline: none;}
+#msgText input[type="text"]:focus,
+#msgText input[type="text"]:hover {
+    background-color: #d0e2f0;
+    border: 1px solid #999999;}
+#msgText input[type="submit"] {
+    border: 1px solid #006633;
+    background-color: #3377ff;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 10px;}
+#msgText input[type="submit"]:hover {
+    border: 1px solid #006633;
+    background-color: #009fff;
+    color: #ffffff;
+    cursor: pointer;}
+
+/*-----------SHANE'S CSS------------*/
+
+table
 {
-	width: 120px;
-	border: 1px solid #d6d6d6;
-	padding: 2px;
-	margin:10px;
-	outline: none;
+    width:70%;
+    border: 2px solid #3377ff;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
 }
 
-input[type="text"]:focus,input[type="text"]:hover 
-{
-	background-color: #d0e2f0;
-	border: 1px solid #999999;
+th, td {
+    padding: 7px;
 }
 
-input[type="submit"]
+th
 {
-	border: 1px solid #006633;
-	background-color: #3377ff;
-	color: #ffffff;
-	border-radius: 5px;
-	padding: 5px;
-	margin-top: 10px;
-}
-	
-input[type="submit"]:hover
-{
-	border: 1px solid #006633;
-	background-color: #009fff;
-	color: #ffffff;
-	cursor: pointer;
+    border-bottom: 2px solid  #3377ff;
+    border-right: 1px solid  #3377ff;
 }
 
-/*DARRAGH===============================================================================================================*/
+td
+{
+    border: 1px solid  #3377ff;
+}
+
+/*---------JACK'S CSS------------*/
+
+#googleMap
+{
+    position: absolute;
+    right: 35%;
+    top: 25%;
+    bottom: 20%;
+    left: 10%;
+    width: auto;
+    border: 3px solid #7aadff;
+    padding: 250px;
+}
