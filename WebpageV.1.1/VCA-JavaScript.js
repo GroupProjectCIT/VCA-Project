@@ -18,7 +18,7 @@
 	const logOutBtn = document.getElementById('logOutBtn');
 	
 	//add listener to logOutBtn
-	logOutBtn.addEventListener('click', e=>
+	logOutBtn.addEventListener('click', e=>	
 	{
 		//sign out the current user
 		firebase.auth().signOut();
