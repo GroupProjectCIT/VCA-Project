@@ -146,7 +146,7 @@ footer a
 }
 
 
-#addUsersArea
+#adminAddUsersArea
 {
     position:absolute;
     top:20%;
@@ -164,7 +164,7 @@ footer a
     margin:1%;
 }
 
-#addUsersArea input
+#adminAddUsersArea input
 {
     margin-top:0%;
     margin-left:0%;
@@ -172,7 +172,7 @@ footer a
 
 }
 
-#addUsersArea p
+#adminAddUsersArea p
 {
     margin-top:10px;
     margin-left:0%;
