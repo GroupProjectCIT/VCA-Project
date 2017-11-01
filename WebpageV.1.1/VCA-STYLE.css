@@ -279,11 +279,29 @@ td
 #googleMap
 {
     position: absolute;
-    right: 35%;
-    top: 25%;
+    right: 20%;
+    top: 150px;
     bottom: 20%;
-    left: 10%;
+    left: 0;
+    height: 520px;
     width: auto;
     border: 3px solid #7aadff;
     padding: 250px;
 }
+
+
+
+#items
+{
+	position: relative;
+	float: left;
+	border-left: thin solid #003B62;
+	font-family: verdana;
+	background-color: #3377ff;
+  width: 20%;
+  margin-left: 80%;
+  height: 520px;
+  overflow-y: scroll;
+  color: #fff;
+  text-align: center;
+}​

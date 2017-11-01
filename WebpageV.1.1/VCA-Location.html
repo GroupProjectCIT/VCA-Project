@@ -12,6 +12,36 @@
     <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
+    <script>
+    var keys;
+    var config = {
+      apiKey: "AIzaSyBXBZz8ADFzd1AG-SrBcFh2ZSkdZAS7MRw",
+      authDomain: "virtual-care-assistant-462a4.firebaseapp.com",
+      databaseURL: "https://virtual-care-assistant-462a4.firebaseio.com",
+      projectId: "virtual-care-assistant-462a4",
+      storageBucket: "virtual-care-assistant-462a4.appspot.com",
+      messagingSenderId: "141352541511"
+    };
+    firebase.initializeApp(config);
+
+    var patientsRef = firebase.database().ref("patients/");
+    patientsRef.on('value', getNames);
+
+    function getNames(data){
+      var newPatients = data.val();
+      keys = Object.keys(newPatients);
+      console.log(keys);
+      for(var i =0; i<keys.length;i++){
+        var k = keys[i];
+        var patientName = newPatients[i].name;
+        console.log(patientName);
+        var node = document.createElement("ol");
+        node.innerText = patientName;
+        document.getElementById("items").appendChild(node);
+      }
+    }
+    </script>
+
 </head>
 
 
@@ -40,7 +70,9 @@
 	<!--Weather-->
 	<div id="weather"></div>
 </header>
-
+<div id="items">
+    <p style="font-size: 1.4em; text-decoration: underline;">Patient List</p>
+</div>
 <div id="googleMap">
 
     <script>
