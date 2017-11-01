@@ -71,7 +71,12 @@ nav>a:hover{
 .hidden-desktop{
     display: none;
 }
-
+button#logOutBtn.btn-link {
+    color: white;
+}
+button#logOutBtn.btn-link:hover{
+    color: black;
+}
 /*---------ADRIAN'S CSS------------*/
 
 #loginForm
@@ -237,6 +242,14 @@ footer a
     background-color: #009fff;
     color: #ffffff;
     cursor: pointer;}
+
+#btnCreateEvents {
+    left: 25%;
+}
+
+#divifm {
+    left: 25%;
+}
 
 /*-----------SHANE'S CSS------------*/
 
