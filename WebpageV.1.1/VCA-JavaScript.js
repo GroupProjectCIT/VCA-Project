@@ -1,3 +1,7 @@
+
+//When page is loaded start getLocation()
+window.addEventListener("load", getLocation);
+
 (function()
 {
     //alert("onStart function");
@@ -55,4 +59,37 @@ function logOut()
     //alert("logOut function");
     //go to login page
     window.location.href = "VCA-Login.html"
+}
+
+
+
+//Weather variables
+var wLatitude;
+var wLongitude;
+var wQuery;
+
+//Get latitude and longitude of user
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(generateQuery);
+    } 
+	else { 
+        document.getElementById("weather").innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+//Generates the query for weather
+function generateQuery(position) {
+	wLatitude = position.coords.latitude;
+	wLongitude = position.coords.longitude;
+	wQuery = "http://api.apixu.com/v1/current.json?key=70977ec45a7c47b9b65142912170111&q=" + wLatitude + "," + wLongitude;
+	displayWeather();
+}
+
+//Displays current location, weather condition and temperature
+function displayWeather()
+{
+	$.getJSON(wQuery, function( json ) {
+		document.getElementById("weather").innerHTML = json.location.name + "<br>" + json.current.condition.text + "<br>" + json.current.temp_c + "&#8451" ;
+ });
 }

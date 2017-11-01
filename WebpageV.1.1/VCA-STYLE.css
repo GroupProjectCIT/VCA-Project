@@ -265,6 +265,15 @@ td
     border: 1px solid  #3377ff;
 }
 
+#weather{
+	margin-left:90%;
+	margin-top: -120px;
+	color:white;
+    text-decoration: none;
+    font-family:"lucida","arial";
+    font-size:150%;
+}
+
 /*---------JACK'S CSS------------*/
 
 #googleMap
