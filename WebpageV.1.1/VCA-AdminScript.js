@@ -10,7 +10,7 @@
         const accTypeFromRadio = document.getElementById("patientRadioInput").value;
 
         alert(accTypeFromRadio);
-        
+
     }
 
 });
