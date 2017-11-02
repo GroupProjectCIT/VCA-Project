@@ -73,7 +73,7 @@
 </header>
 <div id="items">
   <div>
-    <button id="showLoc" onclick="setMarkers(map);">Show Patients Locations</button>
+    <button id="showLoc" onclick="setMarkers(map);">Show Patients Locations</button> <!-- this button calls the function to display the markers on the map. -->
   </div>
     <p style="font-size: 1.4em; text-decoration: underline;">Patient List</p>
 </div>
@@ -88,7 +88,7 @@
     var patientsRef = firebase.database().ref("patients/");
     patientsRef.on('value', getLocation);
 
-    function getLocation(data){
+    function getLocation(data){ // this function gets the location from firebase and loads it to an array.
       var newPatients = data.val();
       keys = Object.keys(newPatients);
       console.log(keys);
@@ -105,33 +105,16 @@
 
         var tmpInt = i+1;
 
-        var tmpArr = [tmpName, tmpLat, tmpLng, tmpInt];
+        var tmpArr = [tmpName, tmpLat, tmpLng, tmpInt]; //this a temporary array of the elements
 
 
-        marks.push(tmpArr);
+        marks.push(tmpArr); //I then add this to the global array as the requirements for markers is arrays within an array
       }
-      //marks.push(allNames, latitude, long);
+
     }
 
       console.log(marks);
 
-
-
-     /*for(var i = 0; i < marks.length;i++){
-        locationArr.push(marks[i]);
-      } */
-
-
-
-      /*  function myMap() {
-
-
-          var myLatLng = {lat: 51.8969, lng: -8.4863};
-            var mapProp= {
-                center:new google.maps.LatLng(51.8969, -8.4863),
-                zoom:10,
-            };
-            var map=new google.maps.Map(document.getElementById("googleMap"),mapProp); */
             function initMap(){
               map = new google.maps.Map(document.getElementById('googleMap'), {
               zoom: 10,
@@ -176,9 +159,9 @@
                 type: 'poly'
               };
 
-              for(var i = 0; i < marks.length; i++){
+              for(var i = 0; i < marks.length; i++){ //goes through the array marks
                 var setMark = [];
-                setMark = marks[i];
+                setMark = marks[i]; //this assigns the array values in a position of marks temporarily to setMark
                 console.log(setMark);
                 var marker = new google.maps.Marker({
                 position: {lat: setMark[1], lng: setMark[2]},
