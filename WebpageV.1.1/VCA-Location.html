@@ -72,9 +72,12 @@
 	<div id="weather"></div>
 </header>
 <div id="items">
+  <div>
+    <button id="showLoc" onclick="setMarkers(map);">Show Patients Locations</button>
+  </div>
     <p style="font-size: 1.4em; text-decoration: underline;">Patient List</p>
-    <button onclick="setMarkers(map);">Click me</button>
 </div>
+
 <div id="googleMap">
 
     <script>
@@ -173,7 +176,7 @@
                 type: 'poly'
               };
 
-              for(var i = 0; i < 3; i++){
+              for(var i = 0; i < marks.length; i++){
                 var setMark = [];
                 setMark = marks[i];
                 console.log(setMark);

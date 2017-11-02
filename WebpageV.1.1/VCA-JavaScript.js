@@ -50,7 +50,7 @@ window.addEventListener("load", getLocation);
 });
 
 
-}());
+}); //to fix logOut issue please change this line to }());
 
 
 
@@ -72,8 +72,8 @@ var wQuery;
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(generateQuery);
-    } 
-	else { 
+    }
+	else {
         document.getElementById("weather").innerHTML = "Geolocation is not supported by this browser.";
     }
 }

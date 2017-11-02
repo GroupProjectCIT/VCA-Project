@@ -318,3 +318,26 @@ td
   color: #fff;
   text-align: center;
 }​
+
+#showLoc
+{
+  position: relative;
+	float: left;
+  width: 20%;
+  margin-left: 80%;
+  top: 470px;
+  height: 50px;
+  width: 100%;
+
+}
+
+#showLoc
+{
+  background-color: #0041B2;
+
+  border: white;
+  box-shadow: 10px, 10px, 5px #888888;
+  height: : 50px;
+  top: 470px;
+  width: 100%;
+}
