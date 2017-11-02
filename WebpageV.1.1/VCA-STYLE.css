@@ -71,7 +71,12 @@ nav>a:hover{
 .hidden-desktop{
     display: none;
 }
-
+button#logOutBtn.btn-link {
+    color: white;
+}
+button#logOutBtn.btn-link:hover{
+    color: black;
+}
 /*---------ADRIAN'S CSS------------*/
 
 #loginForm
@@ -146,7 +151,7 @@ footer a
 }
 
 
-#addUsersArea
+#adminAddUsersArea
 {
     position:absolute;
     top:20%;
@@ -164,7 +169,7 @@ footer a
     margin:1%;
 }
 
-#addUsersArea input
+#adminAddUsersArea input
 {
     margin-top:0%;
     margin-left:0%;
@@ -172,7 +177,7 @@ footer a
 
 }
 
-#addUsersArea p
+#adminAddUsersArea p
 {
     margin-top:10px;
     margin-left:0%;
@@ -237,6 +242,14 @@ footer a
     background-color: #009fff;
     color: #ffffff;
     cursor: pointer;}
+
+#btnCreateEvents {
+    left: 25%;
+}
+
+#divifm {
+    left: 25%;
+}
 
 /*-----------SHANE'S CSS------------*/
 

@@ -10,9 +10,7 @@
         const accTypeFromRadio = document.getElementById("patientRadioInput").value;
 
         alert(accTypeFromRadio);
-        //disable password Text field
-        document.getElementById("passwordTxtField").disable = "true";
-        document.getElementById("").disable = "true";
+        
     }
 
 });

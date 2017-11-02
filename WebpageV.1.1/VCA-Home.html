@@ -30,7 +30,8 @@
                 <a href="VCA-Location.html">Location</a>
                 <a href="VCA-PatientList.html">Patient List</a>
                 <a href="VCA-Account.html">Account</a>
-                <a href="VCA-Login.html">Logout</a>
+                <a href="VCA-Login.html"><button id="logOutBtn" class="btn-link">Logout</button></a>
+
             </nav>
         </div>
     </div>
@@ -38,6 +39,22 @@
 	<div id="weather"></div>
 </header>
 
+<button id="btnCreateEvents" class="btn btn-primary" onclick="makeApiCall();">
+    Create Events</button>
+
+<div id="divifm">
+    <iframe id="ifmCalendar"
+
+            src="https://www.google.com/calendar/embed?
+                    height=550&amp;wkst=1&amp;bgcolor=%23FFFFFF&
+                    amp;src=24tn4fht2sssdssfdiqqlsedk%40group.calendar.google.com&
+                    amp;color=%238C500B&amp;ctz=Asia%2FCalcutta"
+
+            style="border-width: 0" width="950"
+
+            height="520" frameborder="0" scrolling="no">
+    </iframe>
+</div>
 
 <footer>
     <div id="info">
