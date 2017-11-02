@@ -26,6 +26,7 @@ window.addEventListener("load", getLocation);
     {
         //sign out the current user
         firebase.auth().signOut();
+        window.location.href = "VCA-Login.html";
 
 });
 
@@ -50,7 +51,7 @@ window.addEventListener("load", getLocation);
 });
 
 
-}); //to fix logOut issue please change this line to }());
+}());
 
 
 
