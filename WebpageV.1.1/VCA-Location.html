@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 <head>
@@ -14,6 +13,7 @@
 
     <script>
     var keys;
+    var map;
     var config = {
       apiKey: "AIzaSyBXBZz8ADFzd1AG-SrBcFh2ZSkdZAS7MRw",
       authDomain: "virtual-care-assistant-462a4.firebaseapp.com",
@@ -72,20 +72,125 @@
 </header>
 <div id="items">
     <p style="font-size: 1.4em; text-decoration: underline;">Patient List</p>
+    <button onclick="setMarkers(map);">Click me</button>
 </div>
 <div id="googleMap">
 
     <script>
-        function myMap() {
+    var long= [];
+    var latitude = [];
+    var allNames = [];
+    var marks = [];
+    var patientsRef = firebase.database().ref("patients/");
+    patientsRef.on('value', getLocation);
+
+    function getLocation(data){
+      var newPatients = data.val();
+      keys = Object.keys(newPatients);
+      console.log(keys);
+      for(var i =0; i<keys.length;i++){
+        var k = keys[i];
+        var tmpLng = newPatients[k].long;
+        var tmpLat = newPatients[k].lat;
+        var tmpName = newPatients[k].name;
+
+
+        long.push(tmpLng);
+        latitude.push(tmpLat);
+        allNames.push(tmpName);
+
+        var tmpInt = i+1;
+
+        var tmpArr = [tmpName, tmpLat, tmpLng, tmpInt];
+
+
+        marks.push(tmpArr);
+      }
+      //marks.push(allNames, latitude, long);
+    }
+
+      console.log(marks);
+
+
+
+     /*for(var i = 0; i < marks.length;i++){
+        locationArr.push(marks[i]);
+      } */
+
+
+
+      /*  function myMap() {
+
+
+          var myLatLng = {lat: 51.8969, lng: -8.4863};
             var mapProp= {
                 center:new google.maps.LatLng(51.8969, -8.4863),
                 zoom:10,
             };
-            var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-        }
+            var map=new google.maps.Map(document.getElementById("googleMap"),mapProp); */
+            function initMap(){
+              map = new google.maps.Map(document.getElementById('googleMap'), {
+              zoom: 10,
+              center: {lat: 51.8969, lng: -8.4863}
+            });
+
+            }
+
+            var beaches = [
+              ['Bondi Beach', -33.890542, 151.274856, 4],
+              ['Coogee Beach', -33.923036, 151.259052, 5],
+              ['Cronulla Beach', -34.028249, 151.157507, 3],
+              ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+              ['Maroubra Beach', -33.950198, 151.259302, 1]
+            ];
+
+            var test = [
+              ["Stehanie Hua", 37.7749, -122.4194, 1],
+              ["Jack Hickey", 51.8969, -8.4863, 1],
+              ["Martin Neville", 53.3489, -6.2603, 1]
+            ];
+
+            console.log(test);
+
+            console.log(beaches);
+            console.log(marks);
+
+            function setMarkers(map) {
+
+              var image = {
+                url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+                // This marker is 20 pixels wide by 32 pixels high.
+                size: new google.maps.Size(20, 32),
+                // The origin for this image is (0, 0).
+                origin: new google.maps.Point(0, 0),
+                // The anchor for this image is the base of the flagpole at (0, 32).
+                anchor: new google.maps.Point(0, 32)
+              };
+
+              var shape = {
+                coords: [1, 1, 1, 20, 18, 20, 18, 1],
+                type: 'poly'
+              };
+
+              for(var i = 0; i < 3; i++){
+                var setMark = [];
+                setMark = marks[i];
+                console.log(setMark);
+                var marker = new google.maps.Marker({
+                position: {lat: setMark[1], lng: setMark[2]},
+                map: map,
+                icon: image,
+                shape: shape,
+                title: setMark[0],
+                zIndex: setMark[3]
+              });
+
+            }
+
+          }
     </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEBxGrFwYMfvbAST7liDp52duJPCdP9vo&callback=myMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEBxGrFwYMfvbAST7liDp52duJPCdP9vo&callback=initMap"></script>
 </div><br><br>
 
 <footer>
