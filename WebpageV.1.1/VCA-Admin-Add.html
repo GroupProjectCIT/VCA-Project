@@ -8,8 +8,8 @@
     <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
     <link rel="stylesheet" type="text/css" href="VCA-STYLE.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <html>
@@ -18,8 +18,8 @@
 <header>
     <div class="container">
         <a href="VCA-Home.html">
-            <div class="header-left">
-            </div></a>
+            <div class="header-left"></div>
+		</a>
 
         <div class="header-right">
             <label for="open">
@@ -32,6 +32,9 @@
                 <button id="logOutBtn" onclick="logOut()">Logout</button>
             </nav>
         </div>
+		
+		<!--Weather-->
+	<div id="weather"></div>
 </header>
 
 
@@ -49,7 +52,7 @@
     <input id="AddressTxtField" type="text" name="AddressTxt">
 
     <div id="accTypeRadios">
-        <input id="patientRadioInput" type="radio" name="AccType" value="Patient">Patient</input>
+        <input id="patientRadioInput" type="radio" name="AccType" value="Patient" checked="checked">Patient</input>
         <input id="assistantRadioInput" type="radio" name="AccType" value="Assistant">Assistant</input>
         <input id="adminRadioInput" type="radio" name="AccType" value="Admin">Admin</input>
     </div>
@@ -60,14 +63,11 @@
     <p id="passwordLabel">Password:</p>
     <input id="passwordTxtField" type="text" name="passwordTxt">
     <br>
-    <button id="adminAddUserBtn">Add User</button>
-
-
+    <button id="adminAddUserBtn" onclick="pullInput()">Add User</button>
 </div>
 
 
-<footer>
-</footer>
-<script src="VCA-JavaScript.js"></script>
+<footer></footer>
+<script src="VCA-AdminScript.js"></script>
 </body>
 </html>

@@ -28,7 +28,8 @@ window.addEventListener("load", getLocation);
         firebase.auth().signOut();
         window.location.href = "VCA-Login.html";
 
-});
+	}
+	);
 
 
     //realtime authorization listener // can be commented out after testing to avid running every time
@@ -41,17 +42,17 @@ window.addEventListener("load", getLocation);
             console.log(user);
         }
         else
-            {
-                // No user is signed in
-
-                //logs to console a message
-                console.log("user logedOut/not logged in...thx obama!");
+        {
+			// No user is signed in
+			//logs to console a message
+			console.log("user logedOut/not logged in...thx obama!");
+		}
+	}
+	);
 
 }
-});
-
-
-}());
+()
+);
 
 
 

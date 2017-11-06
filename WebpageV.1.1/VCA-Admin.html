@@ -9,20 +9,17 @@
     <link rel="stylesheet" type="text/css" href="VCA-STYLE.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </head>
 
-
-
 <html>
 <body>
-
 <header>
     <div class="container">
         <a href="VCA-Home.html">
-            <div class="header-left">
-            </div></a>
-
+            <div class="header-left"></div>
+		</a>
         <div class="header-right">
             <label for="open">
                 <span class="hidden-desktop"></span>
@@ -36,8 +33,21 @@
         </div>
 </header>
 
-<footer>
-</footer>
-<script src="VCA-JavaScript.js"></script>
+<div id="adminTable">
+	<table>
+		<tr>
+			<th>NAME</th>
+			<th>EMAIL</th>
+			<th>ADDRESS</th>
+		</tr>
+		<tbody id="adminTableBody">
+		
+		</tbody>
+		
+	</table>
+</div>
+
+<footer></footer>
+<script src="VCA-AdminScript.js"></script>
 </body>
 </html>
