@@ -105,8 +105,8 @@ button#logOutBtn.btn-link:hover{
 footer
 {
     position:absolute;
-    bottom:0px;
-    left:0px;
+    bottom:0%;
+    left:0%;
     width:100%;
     height:10vh;
     background-color:#3377ff;
@@ -119,34 +119,28 @@ footer a
     font-size:80%;
 }
 
+
 #userInfo
 {
     position:absolute;
-    top:150px;
-    left:55%;
-    height:77%;
-    width:50%;
-    font-family:"lucida","arial";
-}
-
-#details
-{
-    position:absolute;
-    top:100px;
-    left:50px;
-    height:300px;
-    width:300px;
+    top:20%;
+    left:5%;
+	right:50%;
+	bottom:10%;
     font-size:110%;
+	/*background-color:lightgray;*/
+
 }
 
 #preferences
 {
     position:absolute;
-    top:150px;
-    right:0px;
-    height:77%;
+    top:20%;
+    right:0%;
     left:50%;
+	bottom:10%;
     font-family:"lucida","arial";
+	/*background-color:gray;*/
 }
 
 
