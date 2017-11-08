@@ -75,108 +75,108 @@
 <div id="items">
     <p style="font-size: 1.4em; text-decoration: underline;">Patient List</p>
 </div>
-<button id="showLoc" onclick="setMarkers(map);">Show Patients Locations</button> <!-- this button calls the function to display the markers on the map. -->
+<button id="showLocMet" onclick="setMarkers(map)">Show Patients Locations</button> <!-- this button calls the function to display the markers on the map. -->
 
 <div id="googleMap">
 
-    <script>
-    var long= [];
-    var latitude = [];
-    var allNames = [];
-    var marks = [];
-    var patientsRef = firebase.database().ref("patients/");
-    patientsRef.on('value', getLocation);
+  <script>
+  var long= [];
+  var latitude = [];
+  var allNames = [];
+  var marks = [];
+  var patientsRef = firebase.database().ref("patients/");
+  patientsRef.on('value', getLocation);
 
-    function getLocation(data){ // this function gets the location from firebase and loads it to an array.
-      var newPatients = data.val();
-      keys = Object.keys(newPatients);
-      console.log(keys);
-      for(var i =0; i<keys.length;i++){
-        var k = keys[i];
-        var tmpLng = newPatients[k].long;
-        var tmpLat = newPatients[k].lat;
-        var tmpName = newPatients[k].name;
-
-
-        long.push(tmpLng);
-        latitude.push(tmpLat);
-        allNames.push(tmpName);
-
-        var tmpInt = i+1;
-
-        var tmpArr = [tmpName, tmpLat, tmpLng, tmpInt]; //this a temporary array of the elements
+  function getLocation(data){ // this function gets the location from firebase and loads it to an array.
+    var newPatients = data.val();
+    keys = Object.keys(newPatients);
+    console.log(keys);
+    for(var i =0; i<keys.length;i++){
+      var k = keys[i];
+      var tmpLng = newPatients[k].long;
+      var tmpLat = newPatients[k].lat;
+      var tmpName = newPatients[k].name;
 
 
-        marks.push(tmpArr); //I then add this to the global array as the requirements for markers is arrays within an array
-      }
+      long.push(tmpLng);
+      latitude.push(tmpLat);
+      allNames.push(tmpName);
 
+      var tmpInt = i+1;
+
+      var tmpArr = [tmpName, tmpLat, tmpLng, tmpInt]; //this a temporary array of the elements
+
+
+      marks.push(tmpArr); //I then add this to the global array as the requirements for markers is arrays within an array
     }
 
-      console.log(marks);
+  }
 
-            function initMap(){
-              map = new google.maps.Map(document.getElementById('googleMap'), {
-              zoom: 10,
-              center: {lat: 51.8969, lng: -8.4863}
-            });
+    console.log(marks);
 
-            }
-
-            var beaches = [
-              ['Bondi Beach', -33.890542, 151.274856, 4],
-              ['Coogee Beach', -33.923036, 151.259052, 5],
-              ['Cronulla Beach', -34.028249, 151.157507, 3],
-              ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-              ['Maroubra Beach', -33.950198, 151.259302, 1]
-            ];
-
-            var test = [
-              ["Stehanie Hua", 37.7749, -122.4194, 1],
-              ["Jack Hickey", 51.8969, -8.4863, 1],
-              ["Martin Neville", 53.3489, -6.2603, 1]
-            ];
-
-            console.log(test);
-
-            console.log(beaches);
-            console.log(marks);
-
-            function setMarkers(map) {
-
-              var image = {
-                url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-                // This marker is 20 pixels wide by 32 pixels high.
-                size: new google.maps.Size(20, 32),
-                // The origin for this image is (0, 0).
-                origin: new google.maps.Point(0, 0),
-                // The anchor for this image is the base of the flagpole at (0, 32).
-                anchor: new google.maps.Point(0, 32)
-              };
-
-              var shape = {
-                coords: [1, 1, 1, 20, 18, 20, 18, 1],
-                type: 'poly'
-              };
-
-              for(var i = 0; i < marks.length; i++){ //goes through the array marks
-                var setMark = [];
-                setMark = marks[i]; //this assigns the array values in a position of marks temporarily to setMark
-                console.log(setMark);
-                var marker = new google.maps.Marker({
-                position: {lat: setMark[1], lng: setMark[2]},
-                map: map,
-                icon: image,
-                shape: shape,
-                title: setMark[0],
-                zIndex: setMark[3]
-              });
-
-            }
+          function initMap(){
+            map = new google.maps.Map(document.getElementById('googleMap'), {
+            zoom: 10,
+            center: {lat: 51.8969, lng: -8.4863}
+          });
 
           }
-    </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEBxGrFwYMfvbAST7liDp52duJPCdP9vo&callback=initMap"></script>
+          var beaches = [
+            ['Bondi Beach', -33.890542, 151.274856, 4],
+            ['Coogee Beach', -33.923036, 151.259052, 5],
+            ['Cronulla Beach', -34.028249, 151.157507, 3],
+            ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+            ['Maroubra Beach', -33.950198, 151.259302, 1]
+          ];
+
+          var test = [
+            ["Stehanie Hua", 37.7749, -122.4194, 1],
+            ["Jack Hickey", 51.8969, -8.4863, 1],
+            ["Martin Neville", 53.3489, -6.2603, 1]
+          ];
+
+          console.log(test);
+
+          console.log(beaches);
+          console.log(marks);
+
+          function setMarkers(map) {
+
+            var image = {
+              url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+              // This marker is 20 pixels wide by 32 pixels high.
+              size: new google.maps.Size(20, 32),
+              // The origin for this image is (0, 0).
+              origin: new google.maps.Point(0, 0),
+              // The anchor for this image is the base of the flagpole at (0, 32).
+              anchor: new google.maps.Point(0, 32)
+            };
+
+            var shape = {
+              coords: [1, 1, 1, 20, 18, 20, 18, 1],
+              type: 'poly'
+            };
+
+            for(var i = 0; i < marks.length; i++){ //goes through the array marks
+              var setMark = [];
+              setMark = marks[i]; //this assigns the array values in a position of marks temporarily to setMark
+              console.log(setMark);
+              var marker = new google.maps.Marker({
+              position: {lat: setMark[1], lng: setMark[2]},
+              map: map,
+              icon: image,
+              shape: shape,
+              title: setMark[0],
+              zIndex: setMark[3]
+            });
+
+          }
+
+        }
+  </script>
+
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEBxGrFwYMfvbAST7liDp52duJPCdP9vo&callback=initMap"></script>
 </div><br><br>
 
 <footer>
@@ -184,8 +184,9 @@
         <a href="VCA-About.html">About</a>
         <a href="VCA-Contact.html">Contact</a>
     </div>
-    <script src="VCA-JavaScript.js"></script>
+
 </footer>
+<script src="VCA-JavaScript.js"></script>
 
 </body>
 </html>

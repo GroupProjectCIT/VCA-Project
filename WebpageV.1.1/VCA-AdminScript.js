@@ -88,26 +88,27 @@ function pullInput()
 	//variables to hold input from fields for adding a user
 	var fName = document.getElementById('fNameTxtField').value;
 	var lName = document.getElementById('lNameTxtField').value;
-	var adrs = document.getElementById('AddressTxtField').value;
-	var email = document.getElementById('emailTxtField').value;
-	var pass = document.getElementById('passwordTxtField').value;
-	
+	var address = document.getElementById('AddressTxtField').value;
+
 	// a variable that holds the selection from radio buttons , set to patient by default
 	var accTypeFromRadio = document.getElementById('patientRadioInput').value;
 	
+<<<<<<< HEAD
 	//variables for coordinates requested by Jack to be pushed empty to patient on create
 	var longi = "";
 	var lati = "";
+=======
+	var email = document.getElementById('emailTxtField').value;
+	var pass = document.getElementById('passwordTxtField').value;
+>>>>>>> 3455e52e706b1557f93a8b6a029c7ac7df5bb692
 	
-	//reference to database root
-	var rootRef = firebase.database().ref();
-
 	
 	//if patient is checked
 	if(document.getElementById('patientRadioInput').checked)
 	{
 		//set accTypeFromRadio to patient value
 		accTypeFromRadio = document.getElementById('patientRadioInput').value;
+<<<<<<< HEAD
 		
 		//reference to patients
 		var patientRef = rootRef.child("patients");
@@ -118,12 +119,15 @@ function pullInput()
 		//creates a new child in patients with unique ID made by firebase with all fields passed in and values from the user
 		patientChildRef.set({fName: fName, lName: lName, address: adrs, email: email,password: pass, longitude: longi, latitude: lati});
 	
+=======
+>>>>>>> 3455e52e706b1557f93a8b6a029c7ac7df5bb692
 	}
 	//if assistant is checked
 	else if(document.getElementById('assistantRadioInput').checked)
 	{
 		//set accTypeFromRadio to assistant value
 		accTypeFromRadio = document.getElementById('assistantRadioInput').value;
+<<<<<<< HEAD
 		
 		//reference to assistants
 		var assistantsRef = rootRef.child("assistants");
@@ -134,12 +138,15 @@ function pullInput()
 		//creates a new child in assistants with unique ID made by firebase with all fields passed in and values from the user
 		assistantsChildRef.set({fName: fName, lName: lName, address: adrs, email: email,password: pass});
 		
+=======
+>>>>>>> 3455e52e706b1557f93a8b6a029c7ac7df5bb692
 	}
 	//if admin is checked
 	else if(document.getElementById('adminRadioInput').checked)
 	{
 		//set accTypeFromRadio to admin value
 		accTypeFromRadio = document.getElementById('adminRadioInput').value;
+<<<<<<< HEAD
 		
 		//reference to admins
 		var adminsRef = rootRef.child("admins");
@@ -149,18 +156,12 @@ function pullInput()
 		
 		//creates a new child in admins with unique ID made by firebase with all fields passed in and values from the user
 		adminsChildRef.set({fName: fName, lName: lName, address: adrs, email: email,password: pass});	
+=======
+>>>>>>> 3455e52e706b1557f93a8b6a029c7ac7df5bb692
 	}
 	
 	//testing input
-	alert(fName+lName+adrs+accTypeFromRadio+email+pass);
-	
-	//clear the input fields
-	document.getElementById('fNameTxtField').value = "";
-	document.getElementById('lNameTxtField').value = "";
-	document.getElementById('AddressTxtField').value = "";
-	document.getElementById('emailTxtField').value = "";
-	document.getElementById('passwordTxtField').value = "";
-	
+	alert(fName+lName+address+accTypeFromRadio+email+pass);
 }
 
 
