@@ -17,19 +17,27 @@
 	var vcaAssistantsRef = firebase.database().ref().child("assistants");
 	var vcaPatientsRef = firebase.database().ref().child("patients");
 	
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//ADD BLANK FIELDS FOR LONG AND LATIT WHEN CREATING A PATIENT
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
 	//on adding of a child referenced by vcaAdminsRef, this triggers whenever a new child is added or on loading of page
 	vcaAdminsRef.on
 	('child_added', snap =>
 	{
 		// variables to hold the atributes/labels of the retrieved child returned in the snap
-		var name = snap.child("name").val();
+		var fName = snap.child("fName").val();
+		var lName = snap.child("lName").val();
 		var email = snap.child("email").val();
 		var address = snap.child("address").val();
 		
 		//(jquery) append table rows and table data to the adminTableBody table with the atributes of the retrieved child
 		$("#adminTableBody").append
 		(
-			"<tr><td>" + name +"</td><td>" + email + "</td><td>" + address + "</td></tr>"
+			"<tr><td>" + fName +"</td><td>" + lName + "<\td><td>" + email + "</td><td>" + address + "</td></tr>"
 		);
 	}
 	);
@@ -39,37 +47,40 @@
 	('child_added', snap =>
 	{
 		// variables to hold the atributes/labels of the retrieved child returned in the snap
-		var name = snap.child("name").val();
+		var fName = snap.child("fName").val();
+		var lName = snap.child("lName").val();
 		var email = snap.child("email").val();
 		var address = snap.child("address").val();
 		
 		//(jquery) append table rows and table data to the adminTableBody table with the atributes of the retrieved child
 		$("#adminTableBody").append
 		(
-			"<tr><td>" + name +"</td><td>" + email + "</td><td>" + address + "</td></tr>"
+			"<tr><td>" + fName +"</td><td>" + lName + "<\td><td>" + email + "</td><td>" + address + "</td></tr>"
 		);
 	}
 	);
 	
 	//on adding of a child referenced by vcaAdminsRef, this triggers whenever a new child is added or on loading of page
-	vcaPatientsRef.on
-	('child_added', snap =>
+	vcaPatientsRef.on('child_added', snap =>
 	{
 		// variables to hold the atributes/labels of the retrieved child returned in the snap
-		var name = snap.child("name").val();
+		var fName = snap.child("fName").val();
+		var lName = snap.child("lName").val();
 		var email = snap.child("email").val();
 		var address = snap.child("address").val();
 		
 		//(jquery) append table rows and table data to the adminTableBody table with the atributes of the retrieved child
 		$("#adminTableBody").append
 		(
-			"<tr><td>" + name +"</td><td>" + email + "</td><td>" + address + "</td></tr>"
+			"<tr><td>" + fName +"</td><td>" + lName + "<\td><td>" + email + "</td><td>" + address + "</td></tr>"
 		);
 	}
 	);
 	
 
 }());
+
+
 
 //pulls info from fields for addins a user
 function pullInput()
@@ -84,6 +95,9 @@ function pullInput()
 	// a variable that holds the selection from radio buttons , set to patient by default
 	var accTypeFromRadio = document.getElementById('patientRadioInput').value;
 	
+	//variables for coordinates requested by Jack to be pushed empty to patient on create
+	var longi = "";
+	var lati = "";
 	
 	//reference to database root
 	var rootRef = firebase.database().ref();
@@ -102,7 +116,7 @@ function pullInput()
 		var patientChildRef = patientRef.push();
 		
 		//creates a new child in patients with unique ID made by firebase with all fields passed in and values from the user
-		patientChildRef.set({fname: fName, lName: lName, address: adrs, email: email,password: pass});
+		patientChildRef.set({fName: fName, lName: lName, address: adrs, email: email,password: pass, longitude: longi, latitude: lati});
 	
 	}
 	//if assistant is checked
@@ -118,7 +132,7 @@ function pullInput()
 		var assistantsChildRef = assistantsRef.push();
 		
 		//creates a new child in assistants with unique ID made by firebase with all fields passed in and values from the user
-		assistantsChildRef.set({fname: fName, lName: lName, address: adrs, email: email,password: pass});
+		assistantsChildRef.set({fName: fName, lName: lName, address: adrs, email: email,password: pass});
 		
 	}
 	//if admin is checked
@@ -134,7 +148,7 @@ function pullInput()
 		var adminsChildRef = adminsRef.push();
 		
 		//creates a new child in admins with unique ID made by firebase with all fields passed in and values from the user
-		adminsChildRef.set({fname: fName, lName: lName, address: adrs, email: email,password: pass});	
+		adminsChildRef.set({fName: fName, lName: lName, address: adrs, email: email,password: pass});	
 	}
 	
 	//testing input
