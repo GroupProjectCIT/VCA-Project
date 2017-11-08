@@ -77,36 +77,76 @@ function pullInput()
 	//variables to hold input from fields for adding a user
 	var fName = document.getElementById('fNameTxtField').value;
 	var lName = document.getElementById('lNameTxtField').value;
-	var address = document.getElementById('AddressTxtField').value;
-
-	// a variable that holds the selection from radio buttons , set to patient by default
-	var accTypeFromRadio = document.getElementById('patientRadioInput').value;
-	
+	var adrs = document.getElementById('AddressTxtField').value;
 	var email = document.getElementById('emailTxtField').value;
 	var pass = document.getElementById('passwordTxtField').value;
 	
+	// a variable that holds the selection from radio buttons , set to patient by default
+	var accTypeFromRadio = document.getElementById('patientRadioInput').value;
+	
+	
+	//reference to database root
+	var rootRef = firebase.database().ref();
+
 	
 	//if patient is checked
 	if(document.getElementById('patientRadioInput').checked)
 	{
 		//set accTypeFromRadio to patient value
 		accTypeFromRadio = document.getElementById('patientRadioInput').value;
+		
+		//reference to patients
+		var patientRef = rootRef.child("patients");
+		
+		//reference to child of patients with push
+		var patientChildRef = patientRef.push();
+		
+		//creates a new child in patients with unique ID made by firebase with all fields passed in and values from the user
+		patientChildRef.set({fname: fName, lName: lName, address: adrs, email: email,password: pass});
+	
 	}
 	//if assistant is checked
 	else if(document.getElementById('assistantRadioInput').checked)
 	{
 		//set accTypeFromRadio to assistant value
 		accTypeFromRadio = document.getElementById('assistantRadioInput').value;
+		
+		//reference to assistants
+		var assistantsRef = rootRef.child("assistants");
+		
+		//reference to child of assistants with push
+		var assistantsChildRef = assistantsRef.push();
+		
+		//creates a new child in assistants with unique ID made by firebase with all fields passed in and values from the user
+		assistantsChildRef.set({fname: fName, lName: lName, address: adrs, email: email,password: pass});
+		
 	}
 	//if admin is checked
 	else if(document.getElementById('adminRadioInput').checked)
 	{
 		//set accTypeFromRadio to admin value
 		accTypeFromRadio = document.getElementById('adminRadioInput').value;
+		
+		//reference to admins
+		var adminsRef = rootRef.child("admins");
+		
+		//reference to child of admins with push
+		var adminsChildRef = adminsRef.push();
+		
+		//creates a new child in admins with unique ID made by firebase with all fields passed in and values from the user
+		adminsChildRef.set({fname: fName, lName: lName, address: adrs, email: email,password: pass});	
 	}
 	
 	//testing input
-	alert(fName+lName+address+accTypeFromRadio+email+pass);
+	alert(fName+lName+adrs+accTypeFromRadio+email+pass);
+	
+	//clear the input fields
+	document.getElementById('fNameTxtField').value = "";
+	document.getElementById('lNameTxtField').value = "";
+	document.getElementById('AddressTxtField').value = "";
+	document.getElementById('emailTxtField').value = "";
+	document.getElementById('passwordTxtField').value = "";
+	
 }
 
 
