@@ -33,7 +33,7 @@
       console.log(keys);
       for(var i =0; i<keys.length;i++){
         var k = keys[i];
-        var patientName = newPatients[i].name;
+        var patientName = (newPatients[k].fName) + " " + (newPatients[k].lName);
         console.log(patientName);
         var node = document.createElement("ol");
         node.innerText = patientName;
@@ -93,9 +93,9 @@
     console.log(keys);
     for(var i =0; i<keys.length;i++){
       var k = keys[i];
-      var tmpLng = newPatients[k].long;
-      var tmpLat = newPatients[k].lat;
-      var tmpName = newPatients[k].name;
+      var tmpLng = newPatients[k].longitude;
+      var tmpLat = newPatients[k].latitude;
+      var tmpName = newPatients[k].fName;
 
 
       long.push(tmpLng);
