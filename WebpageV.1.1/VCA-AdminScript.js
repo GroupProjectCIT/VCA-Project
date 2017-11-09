@@ -137,9 +137,99 @@
 function editThis(fID)
 {
 	//for testing
-	alert(fID);
+	//alert(fID);
 	
+	//reference to patients
+	 var patientsRef = firebase.database().ref("patients");
+    
+	//on value change call getPatientList
+	patientsRef.on('value', getPatientList);
 	
+	document.getElementById('fNameSelected').innerText = "POOP";
+
+	//generates a list of objects corresponding to users in database
+    function getPatientList(data)
+	{	
+		//set patientList to data received
+		var patientList = data.val();
+		
+		//turn patientList into an object?
+		keys = Object.keys(patientList);
+		
+		//log keys to the console
+		console.log(keys);
+		
+		
+		//loop for all elements in keys
+		for(var i = 0; i < keys.length ; i++)
+		{	
+			
+			//set k to keys at index i (keys are the ids of the children in the firebase database NOTE NOT THE SAME AS FIREBASE UID
+			var k = keys[i];
+			
+			//if firebaseID at index k in patientList is the same as fID(clicked ID) we have found the user we need
+			if(patientList[k].firebaseID == fID)
+			{
+				// testing
+				alert("name: " + patientList[k].fName + " lName : " + patientList[k].lName + " address: " + patientList[k].address + " email: " + patientList[k].email );
+				
+				
+				
+				
+				
+				var fName = document.getElementById('fNameSelected');
+				var lName = document.getElementById('lNameSelected');
+				var email = document.getElementById('emailSelected');
+				var address = document.getElementById('addressSelected');
+				
+				//go to admin-selected page
+				window.location.href = "VCA-Admin-Selected.html";
+				
+				alert("HI");
+				
+				//fName.innerHTML = patientList[k].fName;
+				
+				localStorage.setItem('fNameStore', patientList[k].fName);
+				
+				document.getElementById('fNameSelected').innerText = localStorage.getItem('fNameStore');
+				
+				
+				
+				
+			}
+			
+			//document.getElementById('fNameSelected').innerText = "POOP";
+		}
+		
+		
+		
+		/*
+		//loop for all elements in keys
+		for(var i = 0; i < keys.length ; i++)
+		{	
+			//set k to keys at index i
+			var k = keys[i];
+			
+			//set patientId to the firebaseID field of an element in patientList at index k
+			var patientId = (patientList[k].firebaseID);
+			
+			//log patientId to the console
+			console.log(patientId);
+			
+			// set node to a newly created element ol
+			var node = document.createElement("ol");
+			
+			// set the inner html text of node to patientId
+			node.innerText = patientId;
+			
+			//testing
+			alert(node);
+			
+			//append node to items
+			//document.getElementById("items").appendChild(node);
+      }//end of forloop
+	  */
+    }
 	
 	
 }
