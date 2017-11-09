@@ -21,10 +21,7 @@
         //sign out the current user
         firebase.auth().signOut();
         window.location.href = "VCA-Login.html";
-
-	}
-	);
-	
+	});
 	
 	function logOut()
 	{
@@ -32,7 +29,6 @@
 		//go to login page
 		window.location.href = "VCA-Login.html"
 	}
-	
 	
 	//realtime authorization listener // can be commented out after testing to avid running every time
     firebase.auth().onAuthStateChanged(user =>
@@ -49,17 +45,12 @@
 			//logs to console a message
 			console.log("user logedOut/not logged in...thx obama!");
 		}
-	}
-	);
-	
-	//variable to index the id in table
-	//var tdID = 0;
+	});
 	
 	//references to children of the root in firebase database for each user type
 	var vcaAdminsRef = firebase.database().ref().child("admins");
 	var vcaAssistantsRef = firebase.database().ref().child("assistants");
 	var vcaPatientsRef = firebase.database().ref().child("patients");
-	
 	
 	//on adding of a child referenced by vcaAdminsRef, this triggers whenever a new child is added or on loading of page
 	vcaAdminsRef.on
@@ -79,10 +70,7 @@
 		(
 			"<tr><td>" + fName +"</td><td>" + lName + "<\td><td>" + email + "</td><td>" + address + "</td><td id=fireID onClick = editThis(&quot;" + id + "&quot;)>"+ id +"</td></tr>"
 		);
-		
-		//tdID = tdID+1;
-	}
-	);
+	});
 	
 	
 	//on adding of a child referenced by vcaAdminsRef, this triggers whenever a new child is added or on loading of page
@@ -103,10 +91,7 @@
 		(
 			"<tr><td>" + fName +"</td><td>" + lName + "<\td><td>" + email + "</td><td>" + address + "</td><td id=fireID onClick = editThis(&quot;" + id + "&quot;)>"+ id +"</td></tr>"
 		);
-		
-		//tdID = tdID+1;
-	}
-	);
+	});
 	
 	//on adding of a child referenced by vcaAdminsRef, this triggers whenever a new child is added or on loading of page
 	vcaPatientsRef.on('child_added', snap =>
@@ -125,120 +110,25 @@
 		(
 			"<tr><td>" + fName +"</td><td>" + lName + "<\td><td>" + email + "</td><td>" + address + "</td><td id=fireID onClick = editThis(&quot;" + id + "&quot;)>"+ id +"</td></tr>"
 		);
-		
-		//tdID = tdID+1;
-	}
-	);
-	
+	});
 }());
 
 
 //this function is called when a cell with firebase id in admin table is clicked and receives the firebase id as parameter
 function editThis(fID)
 {
-	//for testing
-	//alert(fID);
+	//store fID in sesson storage
+	sessionStorage.setItem("firebaseID", fID);
 	
-	//reference to patients
-	 var patientsRef = firebase.database().ref("patients");
-    
-	//on value change call getPatientList
-	patientsRef.on('value', getPatientList);
+	// testing
+	//alert("name: " + patientList[k].fName + " lName : " + patientList[k].lName + " address: " + patientList[k].address + " email: " + patientList[k].email );
 	
-	document.getElementById('fNameSelected').innerText = "POOP";
-
-	//generates a list of objects corresponding to users in database
-    function getPatientList(data)
-	{	
-		//set patientList to data received
-		var patientList = data.val();
-		
-		//turn patientList into an object?
-		keys = Object.keys(patientList);
-		
-		//log keys to the console
-		console.log(keys);
-		
-		
-		//loop for all elements in keys
-		for(var i = 0; i < keys.length ; i++)
-		{	
-			
-			//set k to keys at index i (keys are the ids of the children in the firebase database NOTE NOT THE SAME AS FIREBASE UID
-			var k = keys[i];
-			
-			//if firebaseID at index k in patientList is the same as fID(clicked ID) we have found the user we need
-			if(patientList[k].firebaseID == fID)
-			{
-				// testing
-				alert("name: " + patientList[k].fName + " lName : " + patientList[k].lName + " address: " + patientList[k].address + " email: " + patientList[k].email );
-				
-				
-				
-				
-				
-				var fName = document.getElementById('fNameSelected');
-				var lName = document.getElementById('lNameSelected');
-				var email = document.getElementById('emailSelected');
-				var address = document.getElementById('addressSelected');
-				
-				//go to admin-selected page
-				window.location.href = "VCA-Admin-Selected.html";
-				
-				alert("HI");
-				
-				//fName.innerHTML = patientList[k].fName;
-				
-				localStorage.setItem('fNameStore', patientList[k].fName);
-				
-				document.getElementById('fNameSelected').innerText = localStorage.getItem('fNameStore');
-				
-				
-				
-				
-			}
-			
-			//document.getElementById('fNameSelected').innerText = "POOP";
-		}
-		
-		
-		
-		/*
-		//loop for all elements in keys
-		for(var i = 0; i < keys.length ; i++)
-		{	
-			//set k to keys at index i
-			var k = keys[i];
-			
-			//set patientId to the firebaseID field of an element in patientList at index k
-			var patientId = (patientList[k].firebaseID);
-			
-			//log patientId to the console
-			console.log(patientId);
-			
-			// set node to a newly created element ol
-			var node = document.createElement("ol");
-			
-			// set the inner html text of node to patientId
-			node.innerText = patientId;
-			
-			//testing
-			alert(node);
-			
-			//append node to items
-			//document.getElementById("items").appendChild(node);
-      }//end of forloop
-	  */
-    }
+	//go to admin-selected page
+	window.location.href = "VCA-Admin-Selected.html";
 	
-	
-}
+}//end of edit this
 
-
-
-
-
-//pulls info from fields for addins a user
+//pulls info from fields for adding a user
 function pullInput()
 {	
 	//variables to hold input from fields for adding a user
@@ -251,14 +141,12 @@ function pullInput()
 	// a variable that holds the selection from radio buttons , set to patient by default
 	var accTypeFromRadio = document.getElementById('patientRadioInput').value;
 	
-
 	//variables for coordinates requested by Jack to be pushed empty to patient on create
 	var longi = "";
 	var lati = "";
 	
 	//variable to hold unique user id
 	var id = "";
-	
 	
 	//code from firebase for creating a user with email and password
 	firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error)
@@ -268,7 +156,6 @@ function pullInput()
 		var errorMessage = error.message;
 	// ...
 	});
-	
 	
 	//makes a delay for firebase to do its work other wise we get the wrong user id
 	setTimeout(function()
@@ -288,7 +175,6 @@ function pullInput()
 	
 	id = user.uid;
 	
-	
 	//reference to the firebase database root
 	var rootRef = firebase.database().ref();
 	
@@ -307,7 +193,6 @@ function pullInput()
 		//creates a new child in patients with unique ID made by firebase with all fields passed in and values from the user
 		patientChildRef.set({firebaseID: id, fName: fName, lName: lName, address: adrs, email: email, password: pass, longitude: longi, latitude: lati});
 	
-
 	}
 	//if assistant is checked
 	else if(document.getElementById('assistantRadioInput').checked)
@@ -323,8 +208,6 @@ function pullInput()
 		
 		//creates a new child in assistants with unique ID made by firebase with all fields passed in and values from the user
 		assistantsChildRef.set({firebaseID: id, fName: fName, lName: lName, address: adrs, email: email,password: pass});
-		
-
 	}
 	//if admin is checked
 	else if(document.getElementById('adminRadioInput').checked)
@@ -352,14 +235,10 @@ function pullInput()
 	document.getElementById('AddressTxtField').value = "";
 	document.getElementById('passwordTxtField').value = "";
 	
-	
-	
 	//Right now when we "create" a new user we add a new child to the database and then 
 	//we create a new firebase user with supplied email and password, the way the .createUserWithEmailAndPassword()
 	//works is it automatically signs in that user if signup was a success, not sure how much of a problem for us this is
 	//but we should find a solution for this or a workaround later
-	
-	
 	
 	}, 3000);//second parameter is the amount of time to wait
 	//end of setTimeout
