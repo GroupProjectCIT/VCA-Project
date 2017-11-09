@@ -2,7 +2,7 @@
 
 <head>
     <title>
-        VCA/ACCOUNT
+        VCA/ADMIN/SELECTED
     </title>
     <link rel="stylesheet" type="text/css" href="VCA-STYLE.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,6 @@
     <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 </head>
-
 <html>
 <body>
 
@@ -18,17 +17,12 @@
     <div class="container">
         <a href="VCA-Home.html">
             <div class="header-left">
-            </div>
-		</a>
-        
-		<div class="header-right">
-		
+            </div></a>
+        <div class="header-right">
             <label for="open">
-				<span class="hidden-desktop"></span>
+                <span class="hidden-desktop"></span>
             </label>
-			
             <input type="checkbox" name="" id="open">
-			
             <nav>
                 <a href="VCA-Home.html">Home</a>
                 <a href="VCA-Location.html">Location</a>
@@ -36,46 +30,80 @@
                 <a href="VCA-Account.html">Account</a>
                 <a><button id="logOutBtn" class="btn-link">Logout</button></a>
             </nav>
-        </div>	
+        </div>
     </div>
-	
 	<!--Weather-->
 	<div id="weather"></div>
 </header>
 
-<div id="userInfo">
-    <h1>Info</h1>
-    <p>Name:</p>
-    <P>Surname:</P>
-	<p>Address:</p>
-    <p>Email:</p>
-    
+
+
+
+
+
+
+
+
+<div id="selectedUserInfo">
+	
+	<h3>Selected User</h3>
+	<p id="fNameSelected">First Name:</p>
+	<p id="lNameSelected">Last Name:</p>
+	<p id="addressSelected">Address:</p>
+	<p id="emailSelected">Email:</p>
+	<p id="passwordSelected">Password:</p>
+	
+	
+	<div id="selectedUserInputs">
+		
+		<h3>Edit Selected User</h3>
+		
+		<p id="fNameLabel">First Name:</p>
+		<input id="fNameTxtField" size="40" type="text" name="fNameTxt">
+	
+		<p id="lNameLabel">Last Name:</p>
+		<input id="lNameTxtField" size="40" type="text" name="lNameTxt">
+	
+		<p id="AddressLabel">Address:</p>
+		<input id="AddressTxtField" size="40" type="text" name="AddressTxt">
+	
+		<p id="emailLabel">email:</p>
+		<input id="emailTxtField" size="40" type="text" name="emailTxt">
+	
+		<p id="passwordLabel">Password:</p>
+		<input id="passwordTxtField" size="40" type="text" name="passwordTxt">
+		<br>
+		<button id="updateUserBtn" onclick="">Update</button>
+</div>
+	
 </div>
 
 
-<div  id="addUserLoader" class="addUserLoader" style="display:none;" ></div>
 
-<div id="adminAddUsersArea">
 
-    <h3 id="addUserLabel">Add a User</h3>
 
-    <p id="fNameLabel">First Name:</p>
-    <input id="fNameTxtField" size="40" type="text" name="fNameTxt">
 
-    <p id="lNameLabel">Last Name:</p>
-    <input id="lNameTxtField" size="40" type="text" name="lNameTxt">
 
-    <p id="AddressLabel">Address:</p>
-    <input id="AddressTxtField" size="40" type="text" name="AddressTxt">
 
-    <p id="emailLabel">email:</p>
-    <input id="emailTxtField" size="40" type="text" name="emailTxt">
 
-    <p id="passwordLabel">Password:</p>
-    <input id="passwordTxtField" size="40" type="text" name="passwordTxt">
-    <br>
-    <button id="adminAddUserBtn" onclick="assistantAddPatient()">Add User</button>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <footer>
@@ -83,7 +111,7 @@
         <a href="VCA-About.html">About</a>
         <a href="VCA-Contact.html">Contact</a>
     </div>
+    <script src="VCA-JavaScript.js"></script>
 </footer>
-<script src="VCA-JavaScript.js"></script>
 </body>
 </html>
