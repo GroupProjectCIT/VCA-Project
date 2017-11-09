@@ -157,7 +157,6 @@ function pullInput()
 	var adrs = document.getElementById('AddressTxtField').value;
 	var email = document.getElementById('emailTxtField').value;
 	var pass = document.getElementById('passwordTxtField').value;
-<<<<<<< HEAD
 
 	// a variable that holds the selection from radio buttons , set to patient by default
 	var accTypeFromRadio = document.getElementById('patientRadioInput').value;
@@ -202,40 +201,12 @@ function pullInput()
 	
 	//reference to the firebase database root
 	var rootRef = firebase.database().ref();
-=======
-	
-	// a variable that holds the selection from radio buttons , set to patient by default
-	var accTypeFromRadio = document.getElementById('patientRadioInput').value;
-	
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-	//variables for coordinates requested by Jack to be pushed empty to patient on create
-	var longi = "";
-	var lati = "";
-=======
-	var email = document.getElementById('emailTxtField').value;
-	var pass = document.getElementById('passwordTxtField').value;
->>>>>>> 3455e52e706b1557f93a8b6a029c7ac7df5bb692
->>>>>>> e6193e776c294ea29d7b693cff5cec7d1a7bbcce
-	
-	//reference to database root
-	var rootRef = firebase.database().ref();
-
->>>>>>> e63efd4766310353f45e01f1128d64272656ddd4
 	
 	//if patient is checked
 	if(document.getElementById('patientRadioInput').checked)
 	{
 		//set accTypeFromRadio to patient value
 		accTypeFromRadio = document.getElementById('patientRadioInput').value;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> e6193e776c294ea29d7b693cff5cec7d1a7bbcce
->>>>>>> e63efd4766310353f45e01f1128d64272656ddd4
 		
 		//reference to patients
 		var patientRef = rootRef.child("patients");
@@ -244,36 +215,16 @@ function pullInput()
 		var patientChildRef = patientRef.push();
 		
 		//creates a new child in patients with unique ID made by firebase with all fields passed in and values from the user
-<<<<<<< HEAD
 		patientChildRef.set({firebaseID: id, fName: fName, lName: lName, address: adrs, email: email, password: pass, longitude: longi, latitude: lati});
 	
 
-=======
-<<<<<<< HEAD
-		patientChildRef.set({fname: fName, lName: lName, address: adrs, email: email,password: pass});
-	
-=======
-		patientChildRef.set({fName: fName, lName: lName, address: adrs, email: email,password: pass, longitude: longi, latitude: lati});
-	
-=======
->>>>>>> 3455e52e706b1557f93a8b6a029c7ac7df5bb692
->>>>>>> e6193e776c294ea29d7b693cff5cec7d1a7bbcce
->>>>>>> e63efd4766310353f45e01f1128d64272656ddd4
 	}
 	//if assistant is checked
 	else if(document.getElementById('assistantRadioInput').checked)
 	{
 		//set accTypeFromRadio to assistant value
 		accTypeFromRadio = document.getElementById('assistantRadioInput').value;
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> e6193e776c294ea29d7b693cff5cec7d1a7bbcce
-		
->>>>>>> e63efd4766310353f45e01f1128d64272656ddd4
 		//reference to assistants
 		var assistantsRef = rootRef.child("assistants");
 		
@@ -281,34 +232,15 @@ function pullInput()
 		var assistantsChildRef = assistantsRef.push();
 		
 		//creates a new child in assistants with unique ID made by firebase with all fields passed in and values from the user
-<<<<<<< HEAD
 		assistantsChildRef.set({firebaseID: id, fName: fName, lName: lName, address: adrs, email: email,password: pass});
 		
 
-=======
-<<<<<<< HEAD
-		assistantsChildRef.set({fname: fName, lName: lName, address: adrs, email: email,password: pass});
-		
-=======
-		assistantsChildRef.set({fName: fName, lName: lName, address: adrs, email: email,password: pass});
-		
-=======
->>>>>>> 3455e52e706b1557f93a8b6a029c7ac7df5bb692
->>>>>>> e6193e776c294ea29d7b693cff5cec7d1a7bbcce
->>>>>>> e63efd4766310353f45e01f1128d64272656ddd4
 	}
 	//if admin is checked
 	else if(document.getElementById('adminRadioInput').checked)
 	{
 		//set accTypeFromRadio to admin value
 		accTypeFromRadio = document.getElementById('adminRadioInput').value;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> e6193e776c294ea29d7b693cff5cec7d1a7bbcce
->>>>>>> e63efd4766310353f45e01f1128d64272656ddd4
 		
 		//reference to admins
 		var adminsRef = rootRef.child("admins");
@@ -317,7 +249,6 @@ function pullInput()
 		var adminsChildRef = adminsRef.push();
 		
 		//creates a new child in admins with unique ID made by firebase with all fields passed in and values from the user
-<<<<<<< HEAD
 		adminsChildRef.set({firebaseID: id, fName: fName, lName: lName, address: adrs, email: email,password: pass});	
 	}
 	
@@ -342,27 +273,6 @@ function pullInput()
 	
 	}, 3000);//second parameter is the amount of time to wait
 	//end of setTimeout
-=======
-<<<<<<< HEAD
-		adminsChildRef.set({fname: fName, lName: lName, address: adrs, email: email,password: pass});	
-=======
-		adminsChildRef.set({fName: fName, lName: lName, address: adrs, email: email,password: pass});	
-=======
->>>>>>> 3455e52e706b1557f93a8b6a029c7ac7df5bb692
->>>>>>> e6193e776c294ea29d7b693cff5cec7d1a7bbcce
-	}
-	
-	//testing input
-	alert(fName+lName+adrs+accTypeFromRadio+email+pass);
-	
-	//clear the input fields
-	document.getElementById('fNameTxtField').value = "";
-	document.getElementById('lNameTxtField').value = "";
-	document.getElementById('AddressTxtField').value = "";
-	document.getElementById('emailTxtField').value = "";
-	document.getElementById('passwordTxtField').value = "";
-	
->>>>>>> e63efd4766310353f45e01f1128d64272656ddd4
 }
 
 
