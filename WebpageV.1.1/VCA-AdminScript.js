@@ -68,7 +68,7 @@
 		//(jquery) append table rows and table data to the adminTableBody table with the atributes of the retrieved child
 		$("#adminTableBody").append
 		(
-			"<tr><td>" + fName +"</td><td>" + lName + "<\td><td>" + email + "</td><td>" + address + "</td><td id=fireID onClick = editThis(&quot;" + id + "&quot;)>"+ id +"</td></tr>"
+			"<tr><td>" + fName +"</td><td>" + lName + "</td><td>" + email + "</td><td>" + address + "</td><td id=fireID onClick = editThis(&quot;" + id + "&quot;)>"+ id +"</td></tr>"
 		);
 	});
 	
@@ -89,7 +89,7 @@
 		//(jquery) append table rows and table data to the adminTableBody table with the atributes of the retrieved child
 		$("#adminTableBody").append
 		(
-			"<tr><td>" + fName +"</td><td>" + lName + "<\td><td>" + email + "</td><td>" + address + "</td><td id=fireID onClick = editThis(&quot;" + id + "&quot;)>"+ id +"</td></tr>"
+			"<tr><td>" + fName +"</td><td>" + lName + "</td><td>" + email + "</td><td>" + address + "</td><td id=fireID onClick = editThis(&quot;" + id + "&quot;)>"+ id +"</td></tr>"
 		);
 	});
 	
@@ -108,7 +108,7 @@
 		//(jquery) append table rows and table data to the adminTableBody table with the atributes of the retrieved child and call editThis() with the firebase id as parameter
 		$("#adminTableBody").append
 		(
-			"<tr><td>" + fName +"</td><td>" + lName + "<\td><td>" + email + "</td><td>" + address + "</td><td id=fireID onClick = editThis(&quot;" + id + "&quot;)>"+ id +"</td></tr>"
+			"<tr><td>" + fName +"</td><td>" + lName + "</td><td>" + email + "</td><td>" + address + "</td><td id=fireID onClick = editThis(&quot;" + id + "&quot;)>"+ id +"</td></tr>"
 		);
 	});
 }());
@@ -137,6 +137,9 @@ function pullInput()
 	var adrs = document.getElementById('AddressTxtField').value;
 	var email = document.getElementById('emailTxtField').value;
 	var pass = document.getElementById('passwordTxtField').value;
+	var GeoLongitude = document.getElementById('GeoLongitudeField').value;
+	var GeoLatitude = document.getElementById('GeoLatitudeField').value;
+	var phone = document.getElementById('PhoneField').value;
 
 	// a variable that holds the selection from radio buttons , set to patient by default
 	var accTypeFromRadio = document.getElementById('patientRadioInput').value;
@@ -161,85 +164,88 @@ function pullInput()
 	setTimeout(function()
 	{ 
 	
-	//currently logged in user 
-	var user = firebase.auth().currentUser;
-	
-	//alert(user.email + " after adding " + user.uid)
-	//if successful warn the user that they are logged in as the newly created user
-	if(user)
-	{
-		alert("New User Added Succesfully. WARNING you are now logged in as the newly created user.");
-		//this reminds me that the patients should not be able to add new patients
-		//so we need another page for adding users that is only accesable to the assistants. I will make it later.
-	}
-	
-	id = user.uid;
-	
-	//reference to the firebase database root
-	var rootRef = firebase.database().ref();
-	
-	//if patient is checked
-	if(document.getElementById('patientRadioInput').checked)
-	{
-		//set accTypeFromRadio to patient value
-		accTypeFromRadio = document.getElementById('patientRadioInput').value;
+		//currently logged in user 
+		var user = firebase.auth().currentUser;
 		
-		//reference to patients
-		var patientRef = rootRef.child("patients");
+		//alert(user.email + " after adding " + user.uid)
+		//if successful warn the user that they are logged in as the newly created user
+		if(user)
+		{
+			alert("New User Added Succesfully. WARNING you are now logged in as the newly created user.");
+			//this reminds me that the patients should not be able to add new patients
+			//so we need another page for adding users that is only accesable to the assistants. I will make it later.
+		}
 		
-		//reference to child of patients with push
-		var patientChildRef = patientRef.push();
+		id = user.uid;
 		
-		//creates a new child in patients with unique ID made by firebase with all fields passed in and values from the user
-		patientChildRef.set({firebaseID: id, fName: fName, lName: lName, address: adrs, email: email, password: pass, longitude: longi, latitude: lati});
-	
-	}
-	//if assistant is checked
-	else if(document.getElementById('assistantRadioInput').checked)
-	{
-		//set accTypeFromRadio to assistant value
-		accTypeFromRadio = document.getElementById('assistantRadioInput').value;
-
-		//reference to assistants
-		var assistantsRef = rootRef.child("assistants");
+		//reference to the firebase database root
+		var rootRef = firebase.database().ref();
 		
-		//reference to child of assistants with push
-		var assistantsChildRef = assistantsRef.push();
+		//if patient is checked
+		if(document.getElementById('patientRadioInput').checked)
+		{
+			//set accTypeFromRadio to patient value
+			accTypeFromRadio = document.getElementById('patientRadioInput').value;
+			
+			//reference to patients
+			var patientRef = rootRef.child("patients");
+			
+			//reference to child of patients with push
+			var patientChildRef = patientRef.push();
+			
+			//creates a new child in patients with unique ID made by firebase with all fields passed in and values from the user
+			patientChildRef.set({firebaseID: id, fName: fName, lName: lName, address: adrs, email: email, password: pass, longitude: longi, latitude: lati, GeoLongitude:GeoLongitude , GeoLatitude: GeoLatitude,phone: phone, appointment: ""});
 		
-		//creates a new child in assistants with unique ID made by firebase with all fields passed in and values from the user
-		assistantsChildRef.set({firebaseID: id, fName: fName, lName: lName, address: adrs, email: email,password: pass});
-	}
-	//if admin is checked
-	else if(document.getElementById('adminRadioInput').checked)
-	{
-		//set accTypeFromRadio to admin value
-		accTypeFromRadio = document.getElementById('adminRadioInput').value;
+		}
+		//if assistant is checked
+		else if(document.getElementById('assistantRadioInput').checked)
+		{
+			//set accTypeFromRadio to assistant value
+			accTypeFromRadio = document.getElementById('assistantRadioInput').value;
+			
+			//reference to assistants
+			var assistantsRef = rootRef.child("assistants");
+			
+			//reference to child of assistants with push
+			var assistantsChildRef = assistantsRef.push();
+			
+			//creates a new child in assistants with unique ID made by firebase with all fields passed in and values from the user
+			assistantsChildRef.set({firebaseID: id, fName: fName, lName: lName, address: adrs, email: email,password: pass, phone: phone});
+		}
+		//if admin is checked
+		else if(document.getElementById('adminRadioInput').checked)
+		{
+			//set accTypeFromRadio to admin value
+			accTypeFromRadio = document.getElementById('adminRadioInput').value;
+			
+			//reference to admins
+			var adminsRef = rootRef.child("admins");
+			
+			//reference to child of admins with push
+			var adminsChildRef = adminsRef.push();
+			
+			//creates a new child in admins with unique ID made by firebase with all fields passed in and values from the user
+			adminsChildRef.set({firebaseID: id, fName: fName, lName: lName, address: adrs, email: email,password: pass, phone: phone});	
+		}
 		
-		//reference to admins
-		var adminsRef = rootRef.child("admins");
+		//testing input
+		//alert(fName+lName+adrs+accTypeFromRadio+email+pass);
 		
-		//reference to child of admins with push
-		var adminsChildRef = adminsRef.push();
+		//clear input fields at the end
+		document.getElementById('fNameTxtField').value = "";
+		document.getElementById('lNameTxtField').value = "";
+		document.getElementById('emailTxtField').value = "";
+		document.getElementById('AddressTxtField').value = "";
+		document.getElementById('passwordTxtField').value = "";
+		document.getElementById('GeoLongitudeField').value = "";
+		document.getElementById('GeoLatitudeField').value = "";
+		document.getElementById('PhoneField').value = "";
 		
-		//creates a new child in admins with unique ID made by firebase with all fields passed in and values from the user
-		adminsChildRef.set({firebaseID: id, fName: fName, lName: lName, address: adrs, email: email,password: pass});	
-	}
-	
-	//testing input
-	//alert(fName+lName+adrs+accTypeFromRadio+email+pass);
-	
-	//clear input fields at the end
-	document.getElementById('fNameTxtField').value = "";
-	document.getElementById('lNameTxtField').value = "";
-	document.getElementById('emailTxtField').value = "";
-	document.getElementById('AddressTxtField').value = "";
-	document.getElementById('passwordTxtField').value = "";
-	
-	//Right now when we "create" a new user we add a new child to the database and then 
-	//we create a new firebase user with supplied email and password, the way the .createUserWithEmailAndPassword()
-	//works is it automatically signs in that user if signup was a success, not sure how much of a problem for us this is
-	//but we should find a solution for this or a workaround later
-	
+		//Right now when we "create" a new user we add a new child to the database and then 
+		//we create a new firebase user with supplied email and password, the way the .createUserWithEmailAndPassword()
+		//works is it automatically signs in that user if signup was a success, not sure how much of a problem for us this is
+		//but we should find a solution for this or a workaround later
+		
 	}, 3000);//second parameter is the amount of time to wait
 	//end of setTimeout
 }

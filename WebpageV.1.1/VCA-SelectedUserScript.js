@@ -113,22 +113,190 @@
 				// testing
 				//alert("name: " + userList[k].fName + " lName : " + userList[k].lName + " address: " + userList[k].address + " email: " + userList[k].email );
 				
+				//get dom elements
 				var fName = document.getElementById('fNameSelected');
 				var lName = document.getElementById('lNameSelected');
 				var email = document.getElementById('emailSelected');
 				var address = document.getElementById('addressSelected');
 				var pass = document.getElementById('passwordSelected');
+				var geoLong = document.getElementById('GeoLongitudeSelected');
+				var geoLat = document.getElementById('GeoLatitudeSelected');
+				var phone = document.getElementById('PhoneSelected');
 				
+				//fill fields on screen with user values
 				fName.innerHTML = "First Name: " +userList[k].fName;
 				lName.innerHTML = "Last Name: " +userList[k].lName;
 				email.innerHTML = "Email: " +userList[k].email;
 				address.innerHTML = "Address: " +userList[k].address;
 				pass.innerHTML = "Password: " +userList[k].password;
+				geoLong.innerHTML = "Geo-Fence Longitude: " +userList[k].GeoLongitude;
+				geoLat.innerHTML = "Geo-Fence Latitude: "+userList[k].GeoLatitude;
+				phone.innerHTML = "Phone: "+userList[k].phone;
+				
+				alert(keys[i]);
+				
+				//store fID in sesson storage
+				sessionStorage.setItem("selectedUserKey", keys[i]);
+				sessionStorage.setItem("selectedUserObj", userList[k]);
 				
 			}//end of if
 		}//end of forloop
     }//end of getPatients()
 	
-	
-	
 }());
+
+
+function deleteUser()
+{
+	//reference to patients
+	 var patientsRef = firebase.database().ref("patients");
+	 
+	 //reference to assistants
+	 var assistantsRef = firebase.database().ref("assistants");
+	 
+	 //reference to admins
+	 var adminsRef = firebase.database().ref("admins");
+	
+	 var selectedUserKey = sessionStorage.getItem("selectedUserKey");
+	
+	for(var x =0; x <3 ; x++)
+	{
+		if(x==0)
+		{
+			//on value change call getList
+			adminsRef.on('value', getList);
+		}
+		else if(x == 1)
+		{
+			//on value change call getList
+			assistantsRef.on('value', getList);
+		}
+		else
+		{
+			//on value change call getList
+			patientsRef.on('value', getList);
+		}
+	}
+	
+
+	function getList(users)
+	{
+		//set patientList to data received
+		var userList = users.val();
+		
+		//turn patientList into an object?
+		keys = Object.keys(userList);
+		
+		//log keys to the console
+		//console.log(keys);
+		
+		//loop for all elements in keys
+		for(var i = 0; i < keys.length ; i++)
+		{	
+			//set k to keys at index i (keys are the ids of the children in the firebase database NOTE NOT THE SAME AS FIREBASE UID
+			var k = keys[i];
+			
+			//if key is same as selectedUserKey we have the correct user
+			if(k == sessionStorage.getItem("selectedUserKey"))
+			{
+				
+				//attempt to delete selected user, only the user in the correct child will be deleted.
+				patientsRef.child(selectedUserKey).remove();
+				assistantsRef.child(selectedUserKey).remove();
+				adminsRef.child(selectedUserKey).remove();
+				
+				firebase.auth().signInWithEmailAndPassword(userList[k].email, userList[k].password).catch(function(error) {
+				// Handle Errors here.
+				var errorCode = error.code;
+				var errorMessage = error.message;
+				// ...
+				});
+				
+				setTimeout(function()
+				{ 
+					firebase.auth().currentUser.delete()
+					
+				}, 3000);
+				
+			}//end of if
+		}//end of forloop
+	}
+}
+
+function updateUser()
+{
+	//reference to patients
+	 var patientsRef = firebase.database().ref("patients");
+	 
+	 //reference to assistants
+	 var assistantsRef = firebase.database().ref("assistants");
+	 
+	 //reference to admins
+	 var adminsRef = firebase.database().ref("admins");
+	 
+	//get the stored selectedUserKey
+	 var selectedUserKey = sessionStorage.getItem("selectedUserKey");
+	
+	//for very user type
+	for(var x =0; x <3 ; x++)
+	{
+		if(x==0)
+		{
+			//on value change call getList
+			adminsRef.on('value', getList);
+		}
+		else if(x == 1)
+		{
+			//on value change call getList
+			assistantsRef.on('value', getList);
+		}
+		else
+		{
+			//on value change call getList
+			patientsRef.on('value', getList);
+		}
+	}
+	
+	function getList(users)
+	{
+		//set patientList to data received
+		var userList = users.val();
+		
+		//turn patientList into an object?
+		keys = Object.keys(userList);
+		
+		//log keys to the console
+		//console.log(keys);
+		
+		//loop for all elements in keys
+		for(var i = 0; i < keys.length ; i++)
+		{	
+			//set k to keys at index i (keys are the ids of the children in the firebase database NOTE NOT THE SAME AS FIREBASE UID
+			var k = keys[i];
+			
+			//if key is same as selectedUserKey we have the correct user
+			if(k == sessionStorage.getItem("selectedUserKey"))
+			{
+				//code to update the user
+				
+				
+				//variables to hold input from fields for adding a user
+				var fName = document.getElementById('fNameTxtField').value;
+				var lName = document.getElementById('lNameTxtField').value;
+				var adrs = document.getElementById('AddressTxtField').value;
+				var email = document.getElementById('emailTxtField').value;
+				var pass = document.getElementById('passwordTxtField').value;
+				var GeoLongitude = document.getElementById('GeoLongitudeField').value;
+				var GeoLatitude = document.getElementById('GeoLatitudeField').value;
+				var phone = document.getElementById('phoneField').value;
+					
+				
+				
+			}//end of if
+		}//end of forloop
+	}
+}
+
+
+
+
