@@ -200,19 +200,30 @@ footer a
 #selectedUserInfo
 {
 	position: absolute;
+	left: 15%;
+	top: 20%;
+	height:60%;
+    width:20%;
+	/*background-color:gray;*/
+}
+
+#deleteSelectedBtn
+{
+	Position:absolute;
+	right: 15%;
+	top: 25%;
+	 width:10%;
+	
+}
+
+#selectedUserInputs
+{
+	position: absolute;
 	left: 42%;
 	top: 20%;
 	height:60%;
     width:40%;
 	/*background-color:gray;*/
-}
-
-#deleteSelectedBtb
-{
-	Position:absolute;
-	left: 50%;
-	top: 2.5%;
-	
 }
 
 

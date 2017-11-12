@@ -43,12 +43,16 @@
 	<p id="lNameSelected">Last Name:</p>
 	<p id="addressSelected">Address:</p>
 	<p id="emailSelected">Email:</p>
+	<p id="GeoLongitudeSelected">Geo-Fence Longitude:</p>
+	<p id="GeoLatitudeSelected">Geo-Fence Latitude:</p>
+	<p id="PhoneSelected">Phone:</p>
 	<p id="passwordSelected">Password:</p>
+</div>
 	
 	
 	<div id="selectedUserInputs">
 		
-		<h3>Edit Selected User</h3>
+		<h3>Update Selected User</h3>
 		
 		<p id="fNameLabel">First Name:</p>
 		<input id="fNameTxtField" size="40" type="text" name="fNameTxt">
@@ -58,6 +62,15 @@
 	
 		<p id="AddressLabel">Address:</p>
 		<input id="AddressTxtField" size="40" type="text" name="AddressTxt">
+		
+		<p id="GeoLongitudeLabel">Geo-Fence Longitude:</p>
+		<input id="GeoLongitudeField" size="40" type="text" name="GeoLongitudeTxt">
+		
+		<p id="GeoLatitudeLabel">Geo-Fence Latitude:</p>
+		<input id="GeoLatitudeField" size="40" type="text" name="GeoLatitudeTxt">
+		
+		<p id="PhoneLabel">Phone:</p>
+		<input id="PhoneField" size="40" type="text" name="PhoneTxt">
 	
 		<p id="emailLabel">email:</p>
 		<input id="emailTxtField" size="40" type="text" name="emailTxt">
@@ -65,15 +78,15 @@
 		<p id="passwordLabel">Password:</p>
 		<input id="passwordTxtField" size="40" type="text" name="passwordTxt">
 		<br>
-		<button id="updateUserBtn" onclick="">Update</button>
+		<button id="updateUserBtn" onclick="updateUser()">Update</button>
 	</div>
 	
-	<div id="deleteSelectedBtb">
-		<button onclick="">Delete User</button>
+	<div id="deleteSelectedBtn">
+		<button onclick="deleteUser()">Delete User</button>
 		<p>WARNING! This will result in permanent removal of selected User Account and all of it data.</p>
 	</div>
 	
-</div>
+
 
 
 

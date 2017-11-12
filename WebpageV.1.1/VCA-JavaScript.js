@@ -74,19 +74,88 @@ window.addEventListener("load", getLocation);
 
 	}
 	);
+	
+	//reference to the firebase database root
+	var rootRef = firebase.database().ref();
+	
+	var patientsRef = rootRef.child("patients");
+	var assistantsRef = rootRef.child("assistants");
+	var adminsRef = rootRef.child("admins");
+	
+	for(var x =0; x <3 ; x++)
+	{
+		if(x==0)
+		{
+			//on value change call getUserList
+			adminsRef.on('value', getUserList);
+		}
+		else if(x == 1)
+		{
+			//on value change call getUserList
+			assistantsRef.on('value', getUserList);
+		}
+		else
+		{
+			//on value change call getUserList
+			patientsRef.on('value', getUserList);
+		}
+	}
+	
+	//generates a list of objects corresponding to users in database
+    function getUserList(data)
+	{	
+		//set patientList to data received
+		var userList = data.val();
+		
+		//turn patientList into an object?
+		keys = Object.keys(userList);
+		
+		//log keys to the console
+		//console.log(keys);
+		
+		//loop for all elements in keys
+		for(var i = 0; i < keys.length ; i++)
+		{	
+			//set k to keys at index i (keys are the ids of the children in the firebase database NOTE NOT THE SAME AS FIREBASE UID
+			var k = keys[i];
+			
+			var user = firebase.auth().currentUser;
+			
+			//if firebaseID at index k in patientList is the same as fID(clicked ID) we have found the user we need
+			if(userList[k].firebaseID == user.uid)
+			{
+				// testing
+				//alert("name: " + userList[k].fName + " lName : " + userList[k].lName + " address: " + userList[k].address + " email: " + userList[k].email );
+				
+				//get dom elements
+				var fName = document.getElementById('fName');
+				var lName = document.getElementById('lName');
+				var email = document.getElementById('email');
+				var address = document.getElementById('address');
+				var phone = document.getElementById('Phone');
+				
+				//fill fields on screen with user values
+				fName.innerHTML = "First Name: " +userList[k].fName;
+				lName.innerHTML = "Last Name: " +userList[k].lName;
+				email.innerHTML = "Email: " +userList[k].email;
+				address.innerHTML = "Address: " +userList[k].address;
+				phone.innerHTML = "Phone: "+userList[k].phone;
+				
+				alert(keys[i]);
+			}//end of if
+		}//end of forloop
+    }//end of getPatients()
 
 }
 ()
 );
 
-//this function is called when a cell with firebase id in admin table is clicked and receives the firebase id as parameter
+/*//this function is called when a cell with firebase id in admin table is clicked and receives the firebase id as parameter
 function editThis(fID)
 {
 	//for testing
 	alert(fID);
-
-
-}
+}*/
 
 
 function logOut()
