@@ -45,15 +45,7 @@ import com.google.android.gms.tasks.Task;
 import java.util.ArrayList;
 import java.util.Map;
 
-/**
- * Demonstrates how to create and remove geofences using the GeofencingApi. Uses an IntentService
- * to monitor geofence transitions and creates notifications whenever a device enters or exits
- * a geofence.
- * <p>
- * This sample requires a device's Location settings to be turned on. It also requires
- * the ACCESS_FINE_LOCATION permission, as specified in AndroidManifest.xml.
- * <p>
- */
+
 public class GeoMainActivity extends AppCompatActivity implements OnCompleteListener<Void> {
 
     private static final String TAG = GeoMainActivity.class.getSimpleName();
