@@ -133,7 +133,18 @@
 				geoLat.innerHTML = "Geo-Fence Latitude: "+userList[k].GeoLatitude;
 				phone.innerHTML = "Phone: "+userList[k].phone;
 				
-				alert(keys[i]);
+				
+				
+				document.getElementById("fNameTxtField").value = userList[k].fName;
+				document.getElementById("lNameTxtField").value = userList[k].lName;
+				document.getElementById("emailTxtField").value = userList[k].email;
+				document.getElementById("AddressTxtField").value = userList[k].address;
+				document.getElementById("passwordTxtField").value = userList[k].password;
+				document.getElementById("GeoLongitudeField").value = userList[k].GeoLongitude;
+				document.getElementById("GeoLatitudeField").value = userList[k].GeoLatitude;
+				document.getElementById("PhoneField").value = userList[k].phone;
+				
+				//alert(keys[i]);
 				
 				//store fID in sesson storage
 				sessionStorage.setItem("selectedUserKey", keys[i]);
@@ -244,16 +255,23 @@ function updateUser()
 		{
 			//on value change call getList
 			adminsRef.on('value', getList);
+			
+			sessionStorage.setItem("type", "0");
+			
 		}
 		else if(x == 1)
 		{
 			//on value change call getList
 			assistantsRef.on('value', getList);
+			
+			sessionStorage.setItem("type", "1");
 		}
 		else
 		{
 			//on value change call getList
 			patientsRef.on('value', getList);
+			
+			sessionStorage.setItem("type", "2");
 		}
 	}
 	
@@ -264,6 +282,8 @@ function updateUser()
 		
 		//turn patientList into an object?
 		keys = Object.keys(userList);
+		
+		var parent = users.ref().name();
 		
 		//log keys to the console
 		//console.log(keys);
@@ -277,23 +297,38 @@ function updateUser()
 			//if key is same as selectedUserKey we have the correct user
 			if(k == sessionStorage.getItem("selectedUserKey"))
 			{
-				//code to update the user
+				/*//code to update the user
+				if(sessionStorage.getItem("type") == 0)
+				{
+					alert(sessionStorage.getItem("type"));
+				}
+				else if(sessionStorage.getItem("type") == 1)
+				{
+					alert(sessionStorage.getItem("type"));
+				}
+				else if(sessionStorage.getItem("type") == 2)
+				{
+					alert(sessionStorage.getItem("type"));
+				}*/
 				
-				//variables to hold input from fields for adding a user
-				var fName = document.getElementById('fNameTxtField').value;
-				var lName = document.getElementById('lNameTxtField').value;
-				var adrs = document.getElementById('AddressTxtField').value;
-				var email = document.getElementById('emailTxtField').value;
-				var pass = document.getElementById('passwordTxtField').value;
-				var GeoLongitude = document.getElementById('GeoLongitudeField').value;
-				var GeoLatitude = document.getElementById('GeoLatitudeField').value;
-				var phone = document.getElementById('phoneField').value;
+				alert(parent);
 				
-				// need code to include fields if their not null or something like that
+				var fName = document.getElementById("fNameTxtField").value;
+				var lName = document.getElementById("lNameTxtField").value;
+				var email = document.getElementById("emailTxtField").value;
+				var address = document.getElementById("AddressTxtField").value;
+				var pass = document.getElementById("passwordTxtField").value;
+				var geoLong = document.getElementById("GeoLongitudeField").value;
+				var geoLat = document.getElementById("GeoLatitudeField").value;
+				var phone = document.getElementById("PhoneField").value;
 				
-				/*patientsRef.child(k).update();
-				assistantsRef.child(k).update();
-				adminsRef.child(k).update();*/
+				//alert("name: " + fName + " lName : " + lName + " address: " + address + " email: " + email + " Password: " + pass + " long: " + geoLong + " lat: " + geoLat + " phone: " + phone);
+				
+				//alert(sessionStorage.getItem("type"));
+				
+				/*patientsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "GeoLatitude": geoLat, "GeoLongitude": geoLong, "phone": phone});
+				assistantsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "phone": phone});
+				adminsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "phone": phone});*/
 				
 				
 				
