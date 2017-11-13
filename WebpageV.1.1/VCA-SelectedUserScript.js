@@ -279,7 +279,6 @@ function updateUser()
 			{
 				//code to update the user
 				
-				
 				//variables to hold input from fields for adding a user
 				var fName = document.getElementById('fNameTxtField').value;
 				var lName = document.getElementById('lNameTxtField').value;
@@ -289,7 +288,13 @@ function updateUser()
 				var GeoLongitude = document.getElementById('GeoLongitudeField').value;
 				var GeoLatitude = document.getElementById('GeoLatitudeField').value;
 				var phone = document.getElementById('phoneField').value;
-					
+				
+				// need code to include fields if their not null or something like that
+				
+				/*patientsRef.child(k).update();
+				assistantsRef.child(k).update();
+				adminsRef.child(k).update();*/
+				
 				
 				
 			}//end of if
