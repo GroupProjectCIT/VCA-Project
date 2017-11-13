@@ -1,5 +1,6 @@
 package com.example.android.careassistant;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -84,7 +85,15 @@ public class HomeActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.weather) {
 
-        } else if (id == R.id.calendar) {}
+        } else if (id == R.id.calendar) {
+
+        }
+        else if(id == R.id.geofence){
+
+            Intent intent = new Intent(this, GeoMainActivity.class);
+            startActivity(intent);
+
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

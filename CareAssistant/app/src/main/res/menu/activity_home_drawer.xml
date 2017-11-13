@@ -14,6 +14,10 @@
             android:id="@+id/calendar"
 
             android:title="Appointments" />
+        <item
+            android:id="@+id/geofence"
+
+            android:title="Geo Fence" />
     </group>
 
 </menu>
