@@ -236,6 +236,7 @@ function deleteUser()
 
 function updateUser()
 {
+	
 	//reference to patients
 	 var patientsRef = firebase.database().ref("patients");
 	 
@@ -254,36 +255,28 @@ function updateUser()
 		if(x==0)
 		{
 			//on value change call getList
-			adminsRef.on('value', getList);
-			
-			sessionStorage.setItem("type", "0");
+			adminsRef.on('value', getListAd);
 			
 		}
 		else if(x == 1)
 		{
 			//on value change call getList
-			assistantsRef.on('value', getList);
-			
-			sessionStorage.setItem("type", "1");
+			assistantsRef.on('value', getListAs);
 		}
 		else
 		{
 			//on value change call getList
-			patientsRef.on('value', getList);
-			
-			sessionStorage.setItem("type", "2");
+			patientsRef.on('value', getListP);
 		}
 	}
 	
-	function getList(users)
+	function getListAd(users)
 	{
 		//set patientList to data received
 		var userList = users.val();
 		
 		//turn patientList into an object?
 		keys = Object.keys(userList);
-		
-		var parent = users.ref().name();
 		
 		//log keys to the console
 		//console.log(keys);
@@ -297,21 +290,48 @@ function updateUser()
 			//if key is same as selectedUserKey we have the correct user
 			if(k == sessionStorage.getItem("selectedUserKey"))
 			{
-				/*//code to update the user
-				if(sessionStorage.getItem("type") == 0)
-				{
-					alert(sessionStorage.getItem("type"));
-				}
-				else if(sessionStorage.getItem("type") == 1)
-				{
-					alert(sessionStorage.getItem("type"));
-				}
-				else if(sessionStorage.getItem("type") == 2)
-				{
-					alert(sessionStorage.getItem("type"));
-				}*/
+				var fName = document.getElementById("fNameTxtField").value;
+				var lName = document.getElementById("lNameTxtField").value;
+				var email = document.getElementById("emailTxtField").value;
+				var address = document.getElementById("AddressTxtField").value;
+				var pass = document.getElementById("passwordTxtField").value;
+				var geoLong = document.getElementById("GeoLongitudeField").value;
+				var geoLat = document.getElementById("GeoLatitudeField").value;
+				var phone = document.getElementById("PhoneField").value;
 				
-				alert(parent);
+				//alert("name: " + fName + " lName : " + lName + " address: " + address + " email: " + email + " Password: " + pass + " long: " + geoLong + " lat: " + geoLat + " phone: " + phone);
+				
+				
+				//patientsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "GeoLatitude": geoLat, "GeoLongitude": geoLong, "phone": phone});
+				//assistantsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "phone": phone});
+				adminsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "phone": phone});
+				
+			}//end of if
+		}//end of forloop
+	}
+	
+	function getListAs(users)
+	{
+		//set patientList to data received
+		var userList = users.val();
+		
+		//turn patientList into an object?
+		keys = Object.keys(userList);
+		
+		
+		//log keys to the console
+		//console.log(keys);
+		
+		//loop for all elements in keys
+		for(var i = 0; i < keys.length ; i++)
+		{	
+			//set k to keys at index i (keys are the ids of the children in the firebase database NOTE NOT THE SAME AS FIREBASE UID
+			var k = keys[i];
+			
+			//if key is same as selectedUserKey we have the correct user
+			if(k == sessionStorage.getItem("selectedUserKey"))
+			{
+				
 				
 				var fName = document.getElementById("fNameTxtField").value;
 				var lName = document.getElementById("lNameTxtField").value;
@@ -324,13 +344,51 @@ function updateUser()
 				
 				//alert("name: " + fName + " lName : " + lName + " address: " + address + " email: " + email + " Password: " + pass + " long: " + geoLong + " lat: " + geoLat + " phone: " + phone);
 				
-				//alert(sessionStorage.getItem("type"));
-				
-				/*patientsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "GeoLatitude": geoLat, "GeoLongitude": geoLong, "phone": phone});
+				//patientsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "GeoLatitude": geoLat, "GeoLongitude": geoLong, "phone": phone});
 				assistantsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "phone": phone});
-				adminsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "phone": phone});*/
+				//adminsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "phone": phone});
 				
 				
+				
+			}//end of if
+		}//end of forloop
+	}
+	
+	function getListP(users)
+	{
+		//set patientList to data received
+		var userList = users.val();
+		
+		//turn patientList into an object?
+		keys = Object.keys(userList);
+		
+		//log keys to the console
+		//console.log(keys);
+		
+		//loop for all elements in keys
+		for(var i = 0; i < keys.length ; i++)
+		{	
+			//set k to keys at index i (keys are the ids of the children in the firebase database NOTE NOT THE SAME AS FIREBASE UID
+			var k = keys[i];
+			
+			//if key is same as selectedUserKey we have the correct user
+			if(k == sessionStorage.getItem("selectedUserKey"))
+			{
+				
+				var fName = document.getElementById("fNameTxtField").value;
+				var lName = document.getElementById("lNameTxtField").value;
+				var email = document.getElementById("emailTxtField").value;
+				var address = document.getElementById("AddressTxtField").value;
+				var pass = document.getElementById("passwordTxtField").value;
+				var geoLong = document.getElementById("GeoLongitudeField").value;
+				var geoLat = document.getElementById("GeoLatitudeField").value;
+				var phone = document.getElementById("PhoneField").value;
+				
+				//alert("name: " + fName + " lName : " + lName + " address: " + address + " email: " + email + " Password: " + pass + " long: " + geoLong + " lat: " + geoLat + " phone: " + phone);
+				
+				patientsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "GeoLatitude": geoLat, "GeoLongitude": geoLong, "phone": phone});
+				//assistantsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "phone": phone});
+				//adminsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "phone": phone});
 				
 			}//end of if
 		}//end of forloop
