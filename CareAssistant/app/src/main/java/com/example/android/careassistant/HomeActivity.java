@@ -90,7 +90,7 @@ public class HomeActivity extends AppCompatActivity
         else if (id == R.id.weather) {
 
         }
-        
+
         //code to go to the calendar activity goes here Darragh
         else if (id == R.id.calendar) {
 
