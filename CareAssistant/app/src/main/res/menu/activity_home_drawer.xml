@@ -12,12 +12,16 @@
             android:title="Weather" />
         <item
             android:id="@+id/calendar"
-
             android:title="Appointments" />
         <item
             android:id="@+id/geofence"
-
             android:title="Geo Fence" />
+        <item
+            android:id="@+id/music"
+            android:title="Play Music" />
+        <item
+            android:id="@+id/game"
+            android:title="Memory Game" />
     </group>
 
 </menu>

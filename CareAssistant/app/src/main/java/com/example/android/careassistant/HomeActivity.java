@@ -81,19 +81,37 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        //code to access the arduino controls activity goes here Jack
         if (id == R.id.home_controls) {
             // Handle the camera action
-        } else if (id == R.id.weather) {
+        }
 
-        } else if (id == R.id.calendar) {
+        //code to access the weather activity goes here Shane
+        else if (id == R.id.weather) {
 
         }
-        else if(id == R.id.geofence){
+        
+        //code to go to the calendar activity goes here Darragh
+        else if (id == R.id.calendar) {
 
+        }
+
+        // code to access the geofence activity goes here Jack
+        else if(id == R.id.geofence){
             Intent intent = new Intent(this, GeoMainActivity.class);
             startActivity(intent);
+        }
+
+        //Shane add the code to go to the music player activity here
+        else if (id == R.id.music) {
 
         }
+
+        //Darragh Add the code to go to your activity here for the memory game.
+        else if (id == R.id.game) {
+
+        }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
