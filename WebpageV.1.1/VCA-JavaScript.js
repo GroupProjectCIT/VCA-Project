@@ -132,7 +132,7 @@ window.addEventListener("load", getLocation);
 				var lName = document.getElementById('lName');
 				var email = document.getElementById('email');
 				var address = document.getElementById('address');
-				var phone = document.getElementById('Phone');
+				var phone = document.getElementById('phone');
 				
 				//fill fields on screen with user values
 				fName.innerHTML = "First Name: " +userList[k].fName;
@@ -141,7 +141,7 @@ window.addEventListener("load", getLocation);
 				address.innerHTML = "Address: " +userList[k].address;
 				phone.innerHTML = "Phone: "+userList[k].phone;
 				
-				alert(keys[i]);
+				//alert(keys[i]);
 			}//end of if
 		}//end of forloop
     }//end of getPatients()
