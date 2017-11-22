@@ -1,6 +1,7 @@
 package com.example.android.careassistant;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -83,7 +84,12 @@ public class HomeActivity extends AppCompatActivity
 
         //code to access the arduino controls activity goes here Jack
         if (id == R.id.home_controls) {
-            // Handle the camera action
+            Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.integreight.onesheeld");
+            try {
+                startActivity(launchIntent);
+            }catch (Exception e){
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.integreight.onesheeld")));
+            }
         }
 
         //code to access the weather activity goes here Shane

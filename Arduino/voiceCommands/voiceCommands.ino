@@ -5,14 +5,14 @@
 #include <OneSheeld.h>
 
 /* Voice commands set by the user. */
-const char turnonLightCommand[] = "turn lights on";
+const char turnonLightCommand[] = "let there be light";
 const char turnoffLightCommand[] = "turn lights off";
 
 const char turnonHeatCommand[] = "turn heat on";
 const char turnoffHeatCommand[] = "turn heat off";
 
 int ledPin = 13;
-
+int heatPin = 7;
 void setup()
 {
   /* Start Communication. */
@@ -20,6 +20,7 @@ void setup()
   /* Activate the voice recognition. */
   VoiceRecognition.start();
   pinMode(ledPin, OUTPUT);
+  pinMode(heatPin, OUTPUT);
 }
 
 void loop () 
@@ -42,12 +43,12 @@ void loop ()
     else if (!strcmp(turnonHeatCommand,VoiceRecognition.getLastCommand()))
     {
       /* Turn off the LED. */
-     digitalWrite(ledPin, HIGH);
+     digitalWrite(heatPin, HIGH);
     }
     else if (!strcmp(turnoffHeatCommand,VoiceRecognition.getLastCommand()))
     {
       /* Turn off the LED. */
-     digitalWrite(ledPin, LOW);
+     digitalWrite(heatPin, LOW);
     }
   }
 }
