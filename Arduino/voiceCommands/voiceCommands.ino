@@ -5,7 +5,7 @@
 #include <OneSheeld.h>
 
 /* Voice commands set by the user. */
-const char turnonLightCommand[] = "let there be light";
+const char turnonLightCommand[] = "turn lights on";
 const char turnoffLightCommand[] = "turn lights off";
 
 const char turnonHeatCommand[] = "turn heat on";
