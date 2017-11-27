@@ -10,7 +10,7 @@ window.addEventListener("load", getLocation);
     // Initialize Firebase
     const config =
         {
-            apiKey: "AIzaSyBXBZz8ADFzd1AG-SrBcFh2ZSkdZAS7MRw",
+			apiKey: "AIzaSyC8LHD2BLzndmsmBEBIUg-SC7gueGquWn4",
             authDomain: "virtual-care-assistant-462a4.firebaseapp.com",
             databaseURL: "https://virtual-care-assistant-462a4.firebaseio.com",
             storageBucket: "virtual-care-assistant-462a4.appspot.com",
@@ -173,6 +173,9 @@ function assistantAddPatient()
 	var adrs = document.getElementById('AddressTxtField').value;
 	var email = document.getElementById('emailTxtField').value;
 	var pass = document.getElementById('passwordTxtField').value;
+	/*var geoLat = document.getElementById('passwordTxtField').value;
+	var geolon = document.getElementById('passwordTxtField').value;
+	var phone = document.getElementById('passwordTxtField').value;*/
 
 	//variables for coordinates requested by Jack to be pushed empty to patient on create
 	var longi = "";
