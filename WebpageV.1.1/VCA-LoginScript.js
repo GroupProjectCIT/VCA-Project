@@ -1,17 +1,16 @@
 (function()
 {
 
-
     //code from firebase
     // Initialize Firebase
-    const config =
-        {
-            apiKey: "AIzaSyBXBZz8ADFzd1AG-SrBcFh2ZSkdZAS7MRw",
-            authDomain: "virtual-care-assistant-462a4.firebaseapp.com",
-            databaseURL: "https://virtual-care-assistant-462a4.firebaseio.com",
-            storageBucket: "virtual-care-assistant-462a4.appspot.com",
-        };
-
+    const config = {
+      apiKey: "AIzaSyC8LHD2BLzndmsmBEBIUg-SC7gueGquWn4",
+      authDomain: "virtual-care-assistant-462a4.firebaseapp.com",
+      databaseURL: "https://virtual-care-assistant-462a4.firebaseio.com",
+      projectId: "virtual-care-assistant-462a4",
+      storageBucket: "virtual-care-assistant-462a4.appspot.com",
+      messagingSenderId: "141352541511"
+    };
     firebase.initializeApp(config);
 
 
