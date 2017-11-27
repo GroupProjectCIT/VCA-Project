@@ -20,6 +20,9 @@
             android:id="@+id/music"
             android:title="Play Music" />
         <item
+            android:id="@+id/time"
+            android:title="Play Time" />
+        <item
             android:id="@+id/game"
             android:title="Memory Game" />
     </group>
