@@ -119,7 +119,7 @@ public class HomeActivity extends AppCompatActivity
         {
             //sign out the current user
             FirebaseAuth.getInstance().signOut();
-            return true;//////////////////////////////////////////////////////////////////////////////////////
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
