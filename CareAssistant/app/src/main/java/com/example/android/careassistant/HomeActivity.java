@@ -143,7 +143,8 @@ public class HomeActivity extends AppCompatActivity
 
         //code to access the weather activity goes here Shane
         else if (id == R.id.weather) {
-
+            Intent weatherIntent = new Intent(this, WeatherActivity.class);
+            startActivity(weatherIntent);
         }
 
         //code to go to the calendar activity goes here Darragh
@@ -159,7 +160,14 @@ public class HomeActivity extends AppCompatActivity
 
         //Shane add the code to go to the music player activity here
         else if (id == R.id.music) {
+            Intent intent = new Intent(this, MusicActivity.class);
+            startActivity(intent);
+        }
 
+        //Playback of Time
+        else if (id == R.id.time) {
+            Intent intent = new Intent(this, TimeActivity.class);
+            startActivity(intent);
         }
 
         //Darragh Add the code to go to your activity here for the memory game.
