@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "141352541511",
+    "firebase_url": "https://virtual-care-assistant-462a4.firebaseio.com",
+    "project_id": "virtual-care-assistant-462a4",
+    "storage_bucket": "virtual-care-assistant-462a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141352541511:android:87d92b06b012adc2",
+        "android_client_info": {
+          "package_name": "com.example.android.careassistant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "141352541511-9pilb8eolnh039nj3gps69i91t6s8vc3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqL5Tc3sqZq8Nft-OIgPzQZ4xv-qaiPUY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

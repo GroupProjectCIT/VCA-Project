@@ -3,6 +3,7 @@ package com.example.android.careassistant;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -14,16 +15,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.google.firebase.auth.FirebaseAuth;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    //create firebase auth
+    private FirebaseAuth myAuth;
+
+    //create an on state listener for the auth
+    private FirebaseAuth.AuthStateListener  myAuthListener;
+
+
+    //initialize muAuthListener
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -34,6 +49,24 @@ public class HomeActivity extends AppCompatActivity
             }
         }); */
 
+        //get an instance from firebase
+        myAuth = FirebaseAuth.getInstance();
+
+        //listener for is there a user signed in
+        myAuthListener = new FirebaseAuth.AuthStateListener()
+        {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth)
+            {
+                //if a user is not signed in
+                if(firebaseAuth.getCurrentUser() == null)
+                {
+                    //go to login activity
+                    startActivity(new Intent(HomeActivity.this,LoginActivity.class));
+                }
+            }
+        };
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -42,6 +75,16 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+
+    @Override
+    protected void onStart()//on start
+    {
+        super.onStart();//on supers start
+
+        //add myAuthListener to myAuth
+        myAuth.addAuthStateListener(myAuthListener);
     }
 
     @Override
@@ -71,6 +114,12 @@ public class HomeActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        else if(id == R.id.action_signOut)
+        {
+            //sign out the current user
+            FirebaseAuth.getInstance().signOut();
+            return true;//////////////////////////////////////////////////////////////////////////////////////
         }
 
         return super.onOptionsItemSelected(item);

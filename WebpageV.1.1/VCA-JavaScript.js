@@ -62,14 +62,14 @@ window.addEventListener("load", getLocation);
 		var lName = snap.child("lName").val();
 		var email = snap.child("email").val();
 		var address = snap.child("address").val();
-		var id = snap.child("firebaseID").val();
+		//var id = snap.child("firebaseID").val();
 
 		//alert("Name: " + fName + " Last: " + lName + " email: " + email + " address: " + address)
 
-		//(jquery) append table rows and table data to the adminTableBody table with the atributes of the retrieved child and call editThis() with the firebase id as parameter
+		//(jquery) append table rows and table data to the patients table with the atributes of the retrieved child
 		$("#patientTableBody").append
 		(
-			"<tr><td>"+ fName +"</td><td>"+lName+"</td><td>"+email+"</td><td>"+address+"</td><td id=fireID onClick = editThis(&quot;"+id+"&quot;)>"+id+"</td></tr>"
+			"<tr><td>"+ fName +"</td><td>"+lName+"</td><td>"+email+"</td><td>"+address+"</td></tr>" /* THIS ADDS ID TO THE PATIENT TABLE COMENTING IT OUT AS IT WAS NOT DESIRED  BY CLIENT <td id=fireID onClick = editThis(&quot;"+id+"&quot;)>"+id+"</td>*/
 		);
 
 	}
@@ -81,6 +81,15 @@ window.addEventListener("load", getLocation);
 	var patientsRef = rootRef.child("patients");
 	var assistantsRef = rootRef.child("assistants");
 	var adminsRef = rootRef.child("admins");
+	
+	//testing
+	if(window.location == "VCA-Account.html")
+	{
+		alert("Bamboozled");
+	}
+	
+	alert(window.location);
+	
 	
 	for(var x =0; x <3 ; x++)
 	{
