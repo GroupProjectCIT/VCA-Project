@@ -3,6 +3,7 @@
     package="com.example.android.careassistant">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
 
     <application
         android:allowBackup="true"
@@ -68,6 +69,10 @@
         </activity>
 
         <service android:name=".GeoFenceTransitionsAndIntents" />
+
+
+        <activity android:name=".Repeating_activity"/>
+        <receiver android:name=".Notification_receiver"/>
 
     </application>
 </manifest>

@@ -1,5 +1,7 @@
 package com.example.android.careassistant;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +20,8 @@ import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Calendar;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -75,6 +79,25 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        //Alarm ------------------------------------------------
+        Calendar calendarAlarm = Calendar.getInstance();
+
+        calendarAlarm.set(Calendar.HOUR_OF_DAY,19);
+        calendarAlarm.set(Calendar.MINUTE,05);
+        calendarAlarm.set(Calendar.SECOND,30);
+
+        Intent alarmIntent = new Intent(getApplicationContext(), Notification_receiver.class);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),100,alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendarAlarm.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+
+        //Alarm ------------------------------------------------
+
+
     }
 
 
