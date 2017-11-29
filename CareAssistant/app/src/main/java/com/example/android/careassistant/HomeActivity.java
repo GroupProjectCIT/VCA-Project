@@ -170,6 +170,12 @@ public class HomeActivity extends AppCompatActivity
             startActivity(intent);
         }
 
+        //Playback of Time
+        else if (id == R.id.tweet) {
+            Intent intent = new Intent(this, TwitterActivity.class);
+            startActivity(intent);
+        }
+
         //Darragh Add the code to go to your activity here for the memory game.
         else if (id == R.id.game) {
 

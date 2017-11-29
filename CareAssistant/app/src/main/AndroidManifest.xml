@@ -57,6 +57,11 @@
             android:label="@string/app_name" >
 
         </activity>
+        <activity
+            android:name=".TwitterActivity"
+            android:label="@string/app_name" >
+
+        </activity>
         <service android:name=".GeoFenceTransitionsAndIntents" />
 
     </application>

@@ -23,6 +23,9 @@
             android:id="@+id/time"
             android:title="Play Time" />
         <item
+            android:id="@+id/tweet"
+            android:title="Post Location" />
+        <item
             android:id="@+id/game"
             android:title="Memory Game" />
     </group>

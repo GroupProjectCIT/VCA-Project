@@ -23,6 +23,8 @@ import android.widget.Button;
 
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.android.careassistant.Model.Coord;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
@@ -149,7 +151,6 @@ public class WeatherActivity extends AppCompatActivity implements LocationListen
     public void onLocationChanged(Location location) {
         lat = location.getLatitude();
         lng = location.getLongitude();
-
 
         new GetWeather().execute(Common.apiRequest(String.valueOf(lat),String.valueOf(lng)));
     }
