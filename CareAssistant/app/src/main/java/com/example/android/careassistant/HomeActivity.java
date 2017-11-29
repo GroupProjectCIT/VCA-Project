@@ -178,7 +178,8 @@ public class HomeActivity extends AppCompatActivity
 
         //Darragh Add the code to go to your activity here for the memory game.
         else if (id == R.id.game) {
-
+            Intent intent = new Intent(this, GameActivity.class);
+            startActivity(intent);
         }
 
 
