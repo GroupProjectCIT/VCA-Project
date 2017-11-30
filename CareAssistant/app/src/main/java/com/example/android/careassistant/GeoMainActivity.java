@@ -41,6 +41,14 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -51,6 +59,29 @@ public class GeoMainActivity extends AppCompatActivity implements OnCompleteList
     private static final String TAG = GeoMainActivity.class.getSimpleName();
 
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
+    private FirebaseDatabase mFirebaseDatabase;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference mRef, dataRef, nameRef;
+    private String userID;
+
+    public static double latitude, longitude;
+
+    public static double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public static double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
 
     /**
      * Tracks whether the user requested to add or remove geofences, or to do neither.
@@ -85,6 +116,49 @@ public class GeoMainActivity extends AppCompatActivity implements OnCompleteList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
+
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        userID = currentFirebaseUser.getUid();
+
+        dataRef = FirebaseDatabase.getInstance().getReference();
+        mRef = dataRef.child("patients");
+
+        Query query =  dataRef.child("patients").orderByChild("firebaseID").equalTo(userID);
+
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot patient : dataSnapshot.getChildren()) {
+                    String value = patient.getValue().toString();
+                    UserInformation user = patient.getValue(UserInformation.class);
+                    Double lat = Double.parseDouble(user.getGeoLatitude());
+                    Double lon = Double.parseDouble(user.getGeoLongitude());
+                    setLatitude(lat);
+                    setLongitude(lon);
+                    Toast.makeText(GeoMainActivity.this, "latitude: " + getLatitude() + " longitude: " + getLongitude() , Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+       /* myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                showData(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        }); */
+
         // Get the UI widgets.
         mAddGeofencesButton = (Button) findViewById(R.id.add_geofences_button);
         mRemoveGeofencesButton = (Button) findViewById(R.id.remove_geofences_button);
@@ -103,9 +177,37 @@ public class GeoMainActivity extends AppCompatActivity implements OnCompleteList
         mGeofencingClient = LocationServices.getGeofencingClient(this);
     }
 
+    /*private void showData(DataSnapshot dataSnapshot) {
+        for(DataSnapshot ds : dataSnapshot.getChildren()){
+
+
+            UserInformation uInfo = new UserInformation();
+            if(ds.child(userID).getValue(UserInformation.class).getFireBaseID().equals(uInfo.getFireBaseID())){
+                uInfo.setfName(ds.child(userID).getValue(UserInformation.class).getfName()); //set the name
+                uInfo.setlName(ds.child(userID).getValue(UserInformation.class).getlName());
+
+            }
+            //set the email
+
+            //display all the information
+            Log.d(TAG, "showData: name: " + uInfo.getfName());
+            Log.d(TAG, "showData: email: " + uInfo.getlName());
+
+
+            ArrayList<String> array  = new ArrayList<>();
+            array.add(uInfo.getfName());
+            array.add(uInfo.getlName());
+            ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,array);
+           // mListView.setAdapter(adapter);
+            Toast.makeText(getApplicationContext(),uInfo.getlName(), Toast.LENGTH_LONG);
+
+        }
+    } */
+
     @Override
     public void onStart() {
         super.onStart();
+        //mAuth.addAuthStateListener(mAuthListener);
 
         if (!checkPermissions()) {
             requestPermissions();
@@ -233,7 +335,7 @@ public class GeoMainActivity extends AppCompatActivity implements OnCompleteList
      * the user's location.
      */
     private void populateGeofenceList() {
-        for (Map.Entry<String, LatLng> entry : Constants.BAY_AREA_LANDMARKS.entrySet()) {
+        for (Map.Entry<String, LatLng> entry : Constants.PATIENT_FENCE.entrySet()) {
 
             mGeofenceList.add(new Geofence.Builder()
                     // Set the request ID of the geofence. This is a string to identify this
@@ -419,5 +521,23 @@ public class GeoMainActivity extends AppCompatActivity implements OnCompleteList
                 mPendingGeofenceTask = PendingGeofenceTask.NONE;
             }
         }
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
+
+    /**
+     * customizable toast
+     * @param message
+     */
+    private void toastMessage(String message){
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
 }
