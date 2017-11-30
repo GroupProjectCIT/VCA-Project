@@ -45,6 +45,7 @@ public class MusicActivity extends AppCompatActivity {
 
 
         Button playButton = (Button) findViewById(R.id.playButton);
+        Button pauseButton = (Button) findViewById(R.id.pauseButton);
 
         playButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -55,7 +56,11 @@ public class MusicActivity extends AppCompatActivity {
                 play.start();
             }
         });
-
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                play.pause();
+            }
+        });
 
     }
 
