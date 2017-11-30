@@ -13,42 +13,46 @@
 <html>
 <body>
 
-<header class="clearfix">
-    <div class="container">
-        <a href="VCA-Home.html">
-            <div class="header-left">
-            </div></a>
-        <div class="header-right">
-            <label for="open">
-                <span class="hidden-desktop"></span>
-            </label>
-            <input type="checkbox" name="" id="open">
-            <nav>
-				<a draggable="false" href="VCA-Admin.html">Tables</a>
-                <a draggable="false" href="VCA-Admin-Add.html">Add</a>
-                <a><button id="logOutBtn" class="btn-link">Logout</button></a>
-            </nav>
-        </div>
-    </div>
-	<!--Weather-->
-	<div id="weather"></div>
-</header>
+	<header class="clearfix">
+		<div class="container">
+			<a href="VCA-Home.html">
+				<div class="header-left">
+				</div></a>
+			<div class="header-right">
+				<label for="open">
+					<span class="hidden-desktop"></span>
+				</label>
+				<input type="checkbox" name="" id="open">
+				<nav>
+					<a draggable="false" href="VCA-Admin.html">Tables</a>
+					<a draggable="false" href="VCA-Admin-Add.html">Add</a>
+					<a><button id="logOutBtn" class="btn-link">Logout</button></a>
+				</nav>
+			</div>
+		</div>
+		<!--Weather-->
+		<div id="weather"></div>
+	</header>
 
 
 
-<div id="selectedUserInfo">
+	<div id="selectedUserInfo">
+		
+		<h3>Selected User</h3>
+		<p id="fNameSelected">First Name:</p>
+		<p id="lNameSelected">Last Name:</p>
+		<p id="addressSelected">Address:</p>
+		<p id="emailSelected">Email:</p>
+		<p id="GeoLongitudeSelected">Geo-Fence Longitude:</p>
+		<p id="GeoLatitudeSelected">Geo-Fence Latitude:</p>
+		<p id="PhoneSelected">Phone:</p>
+		<p id="passwordSelected">Password:</p>
+	</div>
 	
-	<h3>Selected User</h3>
-	<p id="fNameSelected">First Name:</p>
-	<p id="lNameSelected">Last Name:</p>
-	<p id="addressSelected">Address:</p>
-	<p id="emailSelected">Email:</p>
-	<p id="GeoLongitudeSelected">Geo-Fence Longitude:</p>
-	<p id="GeoLatitudeSelected">Geo-Fence Latitude:</p>
-	<p id="PhoneSelected">Phone:</p>
-	<p id="passwordSelected">Password:</p>
-</div>
-	
+	<div id="updateTip">
+		<h1>Please Note</h1>
+		<p>It is not possible to update Geo-Latitude and Geo-Longitude for Admin and Assistant accounts.</p>
+	</div>
 	
 	<div id="selectedUserInputs">
 		
@@ -72,11 +76,11 @@
 		<p id="PhoneLabel">Phone:</p>
 		<input id="PhoneField" size="40" type="text" name="PhoneTxt">
 	
-		<p id="emailLabel">email:</p>
+		<!--<p id="emailLabel">email:</p>
 		<input id="emailTxtField" size="40" type="text" name="emailTxt">
 	
 		<p id="passwordLabel">Password:</p>
-		<input id="passwordTxtField" size="40" type="text" name="passwordTxt">
+		<input id="passwordTxtField" size="40" type="text" name="passwordTxt"> -->
 		<br>
 		<button id="updateUserBtn" onclick="updateUser()">Update</button>
 	</div>

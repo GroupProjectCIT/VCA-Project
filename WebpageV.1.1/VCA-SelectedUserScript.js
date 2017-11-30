@@ -4,7 +4,9 @@
     // Initialize Firebase
     const config =
         {
-            apiKey: "AIzaSyC8LHD2BLzndmsmBEBIUg-SC7gueGquWn4",
+			// old API key AIzaSyC8LHD2BLzndmsmBEBIUg-SC7gueGquWn4
+			
+            apiKey: " AIzaSyBXBZz8ADFzd1AG-SrBcFh2ZSkdZAS7MRw ",
             authDomain: "virtual-care-assistant-462a4.firebaseapp.com",
             databaseURL: "https://virtual-care-assistant-462a4.firebaseio.com",
             storageBucket: "virtual-care-assistant-462a4.appspot.com",
@@ -134,12 +136,12 @@
 				phone.innerHTML = "Phone: "+userList[k].phone;
 				
 				
-				
+				//fill input fields with selected user info
 				document.getElementById("fNameTxtField").value = userList[k].fName;
 				document.getElementById("lNameTxtField").value = userList[k].lName;
-				document.getElementById("emailTxtField").value = userList[k].email;
+				//document.getElementById("emailTxtField").value = userList[k].email;
 				document.getElementById("AddressTxtField").value = userList[k].address;
-				document.getElementById("passwordTxtField").value = userList[k].password;
+				//document.getElementById("passwordTxtField").value = userList[k].password;
 				document.getElementById("GeoLongitudeField").value = userList[k].GeoLongitude;
 				document.getElementById("GeoLatitudeField").value = userList[k].GeoLatitude;
 				document.getElementById("PhoneField").value = userList[k].phone;
@@ -292,9 +294,9 @@ function updateUser()
 			{
 				var fName = document.getElementById("fNameTxtField").value;
 				var lName = document.getElementById("lNameTxtField").value;
-				var email = document.getElementById("emailTxtField").value;
+				//var email = document.getElementById("emailTxtField").value;
 				var address = document.getElementById("AddressTxtField").value;
-				var pass = document.getElementById("passwordTxtField").value;
+				//var pass = document.getElementById("passwordTxtField").value;
 				var geoLong = document.getElementById("GeoLongitudeField").value;
 				var geoLat = document.getElementById("GeoLatitudeField").value;
 				var phone = document.getElementById("PhoneField").value;
@@ -304,7 +306,7 @@ function updateUser()
 				
 				//patientsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "GeoLatitude": geoLat, "GeoLongitude": geoLong, "phone": phone});
 				//assistantsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "phone": phone});
-				adminsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "phone": phone});
+				adminsRef.child(k).update({"fName": fName, "lName": lName, /*"email": email,*/ "address": address, /*"password": pass,*/ "phone": phone});
 				
 			}//end of if
 		}//end of forloop
@@ -335,9 +337,9 @@ function updateUser()
 				
 				var fName = document.getElementById("fNameTxtField").value;
 				var lName = document.getElementById("lNameTxtField").value;
-				var email = document.getElementById("emailTxtField").value;
+				//var email = document.getElementById("emailTxtField").value;
 				var address = document.getElementById("AddressTxtField").value;
-				var pass = document.getElementById("passwordTxtField").value;
+				//var pass = document.getElementById("passwordTxtField").value;
 				var geoLong = document.getElementById("GeoLongitudeField").value;
 				var geoLat = document.getElementById("GeoLatitudeField").value;
 				var phone = document.getElementById("PhoneField").value;
@@ -345,7 +347,7 @@ function updateUser()
 				//alert("name: " + fName + " lName : " + lName + " address: " + address + " email: " + email + " Password: " + pass + " long: " + geoLong + " lat: " + geoLat + " phone: " + phone);
 				
 				//patientsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "GeoLatitude": geoLat, "GeoLongitude": geoLong, "phone": phone});
-				assistantsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "phone": phone});
+				assistantsRef.child(k).update({"fName": fName, "lName": lName, /*"email": email,*/ "address": address, /*"password": pass,*/ "phone": phone});
 				//adminsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "phone": phone});
 				
 				
@@ -377,16 +379,16 @@ function updateUser()
 				
 				var fName = document.getElementById("fNameTxtField").value;
 				var lName = document.getElementById("lNameTxtField").value;
-				var email = document.getElementById("emailTxtField").value;
+				//var email = document.getElementById("emailTxtField").value;
 				var address = document.getElementById("AddressTxtField").value;
-				var pass = document.getElementById("passwordTxtField").value;
+				//var pass = document.getElementById("passwordTxtField").value;
 				var geoLong = document.getElementById("GeoLongitudeField").value;
 				var geoLat = document.getElementById("GeoLatitudeField").value;
 				var phone = document.getElementById("PhoneField").value;
 				
 				//alert("name: " + fName + " lName : " + lName + " address: " + address + " email: " + email + " Password: " + pass + " long: " + geoLong + " lat: " + geoLat + " phone: " + phone);
 				
-				patientsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "GeoLatitude": geoLat, "GeoLongitude": geoLong, "phone": phone});
+				patientsRef.child(k).update({"fName": fName, "lName": lName, /*"email": email,*/ "address": address, /*"password": pass,*/ "GeoLatitude": geoLat, "GeoLongitude": geoLong, "phone": phone});
 				//assistantsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "phone": phone});
 				//adminsRef.child(k).update({"fName": fName, "lName": lName, "email": email, "address": address, "password": pass, "phone": phone});
 				

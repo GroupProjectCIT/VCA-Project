@@ -4,7 +4,7 @@
     //code from firebase
     // Initialize Firebase
     const config = {
-      apiKey: "AIzaSyC8LHD2BLzndmsmBEBIUg-SC7gueGquWn4",
+      apiKey: "AIzaSyBXBZz8ADFzd1AG-SrBcFh2ZSkdZAS7MRw",
       authDomain: "virtual-care-assistant-462a4.firebaseapp.com",
       databaseURL: "https://virtual-care-assistant-462a4.firebaseio.com",
       projectId: "virtual-care-assistant-462a4",

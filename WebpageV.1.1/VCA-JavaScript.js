@@ -10,7 +10,7 @@ window.addEventListener("load", getLocation);
     // Initialize Firebase
     const config =
         {
-			apiKey: "AIzaSyC8LHD2BLzndmsmBEBIUg-SC7gueGquWn4",
+			apiKey: "AIzaSyBXBZz8ADFzd1AG-SrBcFh2ZSkdZAS7MRw",
             authDomain: "virtual-care-assistant-462a4.firebaseapp.com",
             databaseURL: "https://virtual-care-assistant-462a4.firebaseio.com",
             storageBucket: "virtual-care-assistant-462a4.appspot.com",
@@ -78,19 +78,12 @@ window.addEventListener("load", getLocation);
 	//reference to the firebase database root
 	var rootRef = firebase.database().ref();
 	
+	//references to children of database root
 	var patientsRef = rootRef.child("patients");
 	var assistantsRef = rootRef.child("assistants");
 	var adminsRef = rootRef.child("admins");
 	
-	//testing
-	if(window.location == "VCA-Account.html")
-	{
-		alert("Bamboozled");
-	}
-	
-	alert(window.location);
-	
-	
+/*	//we need to call getUsersList 3 times, once with each children reference
 	for(var x =0; x <3 ; x++)
 	{
 		if(x==0)
@@ -108,36 +101,36 @@ window.addEventListener("load", getLocation);
 			//on value change call getUserList
 			patientsRef.on('value', getUserList);
 		}
-	}
+	}*/
 	
 	//generates a list of objects corresponding to users in database
     function getUserList(data)
 	{	
 		//set patientList to data received
-		var userList = data.val();
+		//var userList = data.val();
 		
 		//turn patientList into an object?
-		keys = Object.keys(userList);
+		//keys = Object.keys(userList);
 		
 		//log keys to the console
 		//console.log(keys);
 		
 		//loop for all elements in keys
-		for(var i = 0; i < keys.length ; i++)
+		//for(var i = 0; i < keys.length ; i++)
 		{	
 			//set k to keys at index i (keys are the ids of the children in the firebase database NOTE NOT THE SAME AS FIREBASE UID
-			var k = keys[i];
+			//var k = keys[i];
 			
-			var user = firebase.auth().currentUser;
+			//var user = firebase.auth().currentUser;
 			
 			//if firebaseID at index k in patientList is the same as fID(clicked ID) we have found the user we need
-			if(userList[k].firebaseID == user.uid)
+			//if(userList[k].firebaseID == user.uid)
 			{
 				// testing
 				//alert("name: " + userList[k].fName + " lName : " + userList[k].lName + " address: " + userList[k].address + " email: " + userList[k].email );
 				
 				//get dom elements
-				var fName = document.getElementById('fName');
+				/*var fName = document.getElementById('fName');
 				var lName = document.getElementById('lName');
 				var email = document.getElementById('email');
 				var address = document.getElementById('address');
@@ -148,7 +141,7 @@ window.addEventListener("load", getLocation);
 				lName.innerHTML = "Last Name: " +userList[k].lName;
 				email.innerHTML = "Email: " +userList[k].email;
 				address.innerHTML = "Address: " +userList[k].address;
-				phone.innerHTML = "Phone: "+userList[k].phone;
+				phone.innerHTML = "Phone: "+userList[k].phone;*/
 				
 				//alert(keys[i]);
 			}//end of if
@@ -182,13 +175,18 @@ function assistantAddPatient()
 	var adrs = document.getElementById('AddressTxtField').value;
 	var email = document.getElementById('emailTxtField').value;
 	var pass = document.getElementById('passwordTxtField').value;
-	/*var geoLat = document.getElementById('passwordTxtField').value;
-	var geolon = document.getElementById('passwordTxtField').value;
-	var phone = document.getElementById('passwordTxtField').value;*/
+	
+	var geoLat = document.getElementById('GeoLatitudeField').value;
+	var geolon = document.getElementById('GeoLongitudeField').value;
+	var phone = document.getElementById('PhoneField').value;
+	
+	//change geoLat,geolon to doubles
+	var geoLonD = parseFloat(geolon);
+	var geoLatD = parseFloat(geoLat);
 
 	//variables for coordinates requested by Jack to be pushed empty to patient on create
-	var longi = "";
-	var lati = "";
+	var longi = 0.0;
+	var lati = 0.0;
 
 	//variable to hold unique user id
 	var id = "";
@@ -216,15 +214,15 @@ function assistantAddPatient()
 	//if successful warn the user that they are logged in as the newly created user
 	if(user)
 	{
-		alert("WARNING! you are now logged in as the newly created user. Some features may be restricted.");
+		alert("New Patient successfully created.");
 		//this reminds me that the patients should not be able to add new patients
 		//so we need another page for adding users that is only accesable to the assistants. I will make it later.
 	}
 
 
 	//set id to the firebase uid of the currently logged in user
-	id = user.uid;
-
+	//id = user.uid;////////////////////////////////////////////////////////////////////////////////////NEEDS TO BE REVERTED BACK TO THIS VERSION AFTER RELOSVING THE ISSUE WITH API KEY 
+	id = "tempID";
 	//reference to the firebase database root
 	var rootRef = firebase.database().ref();
 
@@ -235,7 +233,7 @@ function assistantAddPatient()
 	var patientChildRef = patientRef.push();
 
 	//creates a new child in patients with unique ID made by firebase with all fields passed in and values from the user
-	patientChildRef.set({firebaseID: id, fName: fName, lName: lName, address: adrs, email: email, password: pass, longitude: longi, latitude: lati});
+	patientChildRef.set({firebaseID: id, fName: fName, lName: lName, address: adrs, email: email, password: pass, longitude: longi, latitude: lati,GeoLongitude:geoLatD , GeoLatitude: geoLonD,phone: phone});
 
 	//testing input
 	//alert(fName+lName+adrs+email+pass);
