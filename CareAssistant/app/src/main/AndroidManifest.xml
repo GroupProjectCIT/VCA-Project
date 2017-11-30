@@ -3,11 +3,11 @@
     package="com.example.android.careassistant">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<<<<<<< HEAD
+
     <uses-permission android:name="android.permission.INTERNET" />
-=======
+
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
->>>>>>> 4b1ec22381a3daf6041b9860f3ac6634ed4f5b69
+
 
     <application
         android:allowBackup="true"
@@ -53,12 +53,12 @@
             android:name=".MusicActivity"
             android:label="@string/app_name"></activity>
 
-<<<<<<< HEAD
+
         <service android:name=".GeoFenceTransitionsAndIntents" />
 
         <activity android:name=".test"></activity>
-=======
-        </activity>
+
+       
         <activity
             android:name=".TwitterActivity"
             android:label="@string/app_name" >
@@ -75,7 +75,7 @@
         <activity android:name=".Repeating_activity"/>
         <receiver android:name=".Notification_receiver"/>
 
->>>>>>> 4b1ec22381a3daf6041b9860f3ac6634ed4f5b69
+
     </application>
 
 </manifest>

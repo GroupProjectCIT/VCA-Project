@@ -4,7 +4,8 @@
     // Initialize Firebase
     const config =
         {
-            apiKey: "AIzaSyBXBZz8ADFzd1AG-SrBcFh2ZSkdZAS7MRw",
+            //apiKey: "AIzaSyBXBZz8ADFzd1AG-SrBcFh2ZSkdZAS7MRw",
+			apiKey:"AIzaSyAYJ0F9FHs0qlcHhFnubQyJvZLb23DkxnA",
             authDomain: "virtual-care-assistant-462a4.firebaseapp.com",
             databaseURL: "https://virtual-care-assistant-462a4.firebaseio.com",
             storageBucket: "virtual-care-assistant-462a4.appspot.com",
@@ -144,9 +145,13 @@ function pullInput()
 	// a variable that holds the selection from radio buttons , set to patient by default
 	var accTypeFromRadio = document.getElementById('patientRadioInput').value;
 	
-	//variables for coordinates requested by Jack to be pushed empty to patient on create
-	var longi = "";
-	var lati = "";
+	//change geoLat,geolon to doubles
+	var geoLonD = parseFloat(GeoLongitude);
+	var geoLatD = parseFloat(GeoLatitude);
+	
+	///variables for coordinates requested by Jack to be pushed empty to patient on create
+	var longi = 0.0;
+	var lati = 0.0;
 	
 	//variable to hold unique user id
 	var id = "";
@@ -194,7 +199,7 @@ function pullInput()
 			var patientChildRef = patientRef.push();
 			
 			//creates a new child in patients with unique ID made by firebase with all fields passed in and values from the user
-			patientChildRef.set({firebaseID: id, fName: fName, lName: lName, address: adrs, email: email, password: pass, longitude: longi, latitude: lati, GeoLongitude:GeoLongitude , GeoLatitude: GeoLatitude,phone: phone, appointment: ""});
+			patientChildRef.set({firebaseID: id, fName: fName, lName: lName, address: adrs, email: email, password: pass, longitude: longi, latitude: lati, GeoLongitude:geoLonD , GeoLatitude: geoLatD,phone: phone, appointment: ""});
 		
 		}
 		//if assistant is checked
