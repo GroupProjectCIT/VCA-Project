@@ -49,13 +49,13 @@ final class Constants {
     /**
      * Map for storing information about airports in the San Francisco bay area.
      */
-    static final HashMap<String, LatLng> BAY_AREA_LANDMARKS = new HashMap<>();
+    static final HashMap<String, LatLng> PATIENT_FENCE = new HashMap<>();
 
     static {
         // San Francisco International Airport.
-        BAY_AREA_LANDMARKS.put("Cork City", new LatLng(51.9009050280, -8.47984671342));
+        PATIENT_FENCE.put("Cork City", new LatLng(GeoMainActivity.getLatitude(), GeoMainActivity.getLongitude()));
 
         // Googleplex.
-        BAY_AREA_LANDMARKS.put("Cork", new LatLng(51.8969,-8.4863));
+       // PATIENT_FENCE.put("Cork", new LatLng(51.8969,-8.4863));
     }
 }
