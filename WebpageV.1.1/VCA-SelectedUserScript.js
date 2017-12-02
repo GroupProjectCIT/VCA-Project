@@ -6,8 +6,9 @@
         {
 			// old API key AIzaSyC8LHD2BLzndmsmBEBIUg-SC7gueGquWn4
 			
-            apiKey: " AIzaSyBXBZz8ADFzd1AG-SrBcFh2ZSkdZAS7MRw ",
-            authDomain: "virtual-care-assistant-462a4.firebaseapp.com",
+            //apiKey: " AIzaSyBXBZz8ADFzd1AG-SrBcFh2ZSkdZAS7MRw ",
+            apiKey:"AIzaSyAYJ0F9FHs0qlcHhFnubQyJvZLb23DkxnA",
+			authDomain: "virtual-care-assistant-462a4.firebaseapp.com",
             databaseURL: "https://virtual-care-assistant-462a4.firebaseio.com",
             storageBucket: "virtual-care-assistant-462a4.appspot.com",
         };
