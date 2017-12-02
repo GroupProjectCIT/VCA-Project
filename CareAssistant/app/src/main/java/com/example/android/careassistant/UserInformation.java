@@ -25,6 +25,14 @@ public class UserInformation {
 
     }
 
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     public UserInformation(Double Latitude, Double Longitude) {
         this.latitude = Latitude;
         this.longitude = Longitude;
@@ -32,7 +40,7 @@ public class UserInformation {
 
     public UserInformation(String fireBaseID, String fName, String lName, double GeoLongitude, double GeoLatitude, String key, double longitude, double latitude,
                            String address, String email, String password, String phone) {
-        this.uid = fireBaseID;
+        this.fireBaseID = fireBaseID;
         this.fName = fName;
         this.GeoLatitude = GeoLatitude;
         this.GeoLongitude = GeoLongitude;
@@ -60,7 +68,7 @@ public class UserInformation {
 
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("fireBaseID", fireBaseID);
+        result.put("firebaseID", fireBaseID);
         result.put("fName", fName);
         result.put("lName", lName);
         result.put("longitude", longitude);

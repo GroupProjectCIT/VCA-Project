@@ -21,10 +21,12 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
@@ -43,8 +45,10 @@ public class HomeActivity extends AppCompatActivity {
     private FusedLocationProviderClient mFusedLocationClient;
     private double curLat;
     private double curLong;
-    private Handler handler;
+    private Handler handler, getPatient;
     private CountDownTimer timer;
+    private String userID;
+    private String usersKey;
 
 
     // [START declare_database_ref]
@@ -98,10 +102,6 @@ public class HomeActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.integreight.onesheeld")));
                     }
-                } else if (listView.getItemAtPosition(i).toString().equalsIgnoreCase("Test")) {
-                    Intent intent = new Intent(HomeActivity.this, Test.class);
-                    startActivity(intent);
-
                 }
 
             }
@@ -148,13 +148,45 @@ public class HomeActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        userID = currentFirebaseUser.getUid();
+
+
+
+        getPatient = new Handler();
+        getPatient.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Query query =  mDatabase.child("patients").orderByChild("firebaseID").equalTo(userID);
+
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot patient : dataSnapshot.getChildren()) {
+                            String value = patient.getValue().toString();
+                            UserInformation user = patient.getValue(UserInformation.class);
+                            usersKey = patient.getKey();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        }, 3000);
+
+
+
         handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 submitPost();
             }
-        }, 5000);
+        }, 10000);
 
         timer = new CountDownTimer(60000, 20) {
 
@@ -176,7 +208,9 @@ public class HomeActivity extends AppCompatActivity {
 
     private void submitPost() {
 
-        final String userId = "-KySdfqhHypaTuGyNR0r";
+        //"-KySdfqhHypaTuGyNR0r";
+
+        final String userId = usersKey;
         mDatabase.child("patients").child(userId).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
