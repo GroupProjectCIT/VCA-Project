@@ -65,6 +65,8 @@ public class GeoMainActivity extends AppCompatActivity implements OnCompleteList
     private DatabaseReference mRef, dataRef, nameRef;
     private String userID;
 
+
+
     public static double latitude, longitude;
 
     public static double getLatitude() {
@@ -131,8 +133,8 @@ public class GeoMainActivity extends AppCompatActivity implements OnCompleteList
                 for (DataSnapshot patient : dataSnapshot.getChildren()) {
                     String value = patient.getValue().toString();
                     UserInformation user = patient.getValue(UserInformation.class);
-                    Double lat = Double.parseDouble(user.getGeoLatitude());
-                    Double lon = Double.parseDouble(user.getGeoLongitude());
+                    Double lat = user.getGeoLatitude();
+                    Double lon = user.getGeoLongitude();
                     setLatitude(lat);
                     setLongitude(lon);
                     Toast.makeText(GeoMainActivity.this, "latitude: " + getLatitude() + " longitude: " + getLongitude() , Toast.LENGTH_SHORT).show();

@@ -1,209 +1,222 @@
 package com.example.android.careassistant;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
-public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity {
 
     //create firebase auth
     private FirebaseAuth myAuth;
+    private ListView listView;
+
+    private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 
     //create an on state listener for the auth
-    private FirebaseAuth.AuthStateListener  myAuthListener;
+    private FirebaseAuth.AuthStateListener myAuthListener;
+    private FusedLocationProviderClient mFusedLocationClient;
+    private double curLat;
+    private double curLong;
+    private Handler handler;
+    private CountDownTimer timer;
+
+
+    // [START declare_database_ref]
+    private DatabaseReference mDatabase;
 
 
     //initialize muAuthListener
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        listView = (ListView) findViewById(R.id.listView);
+
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(HomeActivity.this,
+                android.R.layout.simple_list_item_1,
+                getResources().getStringArray(R.array.listItems));
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        }); */
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (listView.getItemAtPosition(i).toString().equalsIgnoreCase("Memory Game")) {
+                    Intent intent = new Intent(HomeActivity.this, GameActivity.class);
+                    startActivity(intent);
+                } else if (listView.getItemAtPosition(i).toString().equalsIgnoreCase("Post Location")) {
+                    Intent intent = new Intent(HomeActivity.this, TwitterActivity.class);
+                    startActivity(intent);
+                } else if (listView.getItemAtPosition(i).toString().equalsIgnoreCase("Play Music")) {
+                    Intent intent = new Intent(HomeActivity.this, MusicActivity.class);
+                    startActivity(intent);
+                } else if (listView.getItemAtPosition(i).toString().equalsIgnoreCase("Geo Fence")) {
+                    Intent intent = new Intent(HomeActivity.this, GeoMainActivity.class);
+                    startActivity(intent);
+                } else if (listView.getItemAtPosition(i).toString().equalsIgnoreCase("Appointments")) {
+                    //Intent intent = new Intent(HomeActivity.this, TwitterActivity.class);
+                    //startActivity(intent);
+                } else if (listView.getItemAtPosition(i).toString().equalsIgnoreCase("Weather")) {
+                    Intent intent = new Intent(HomeActivity.this, WeatherActivity.class);
+                    startActivity(intent);
+                } else if (listView.getItemAtPosition(i).toString().equalsIgnoreCase("Play Time")) {
+                    Intent intent = new Intent(HomeActivity.this, TimeActivity.class);
+                    startActivity(intent);
+                } else if (listView.getItemAtPosition(i).toString().equalsIgnoreCase("Lights and Heating")) {
+                    Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.integreight.onesheeld");
+                    try {
+                        startActivity(launchIntent);
+                    } catch (Exception e) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.integreight.onesheeld")));
+                    }
+                } else if (listView.getItemAtPosition(i).toString().equalsIgnoreCase("Test")) {
+                    Intent intent = new Intent(HomeActivity.this, Test.class);
+                    startActivity(intent);
 
-        //get an instance from firebase
+                }
+
+            }
+        });
+        listView.setAdapter(mAdapter);
         myAuth = FirebaseAuth.getInstance();
 
+
         //listener for is there a user signed in
-        myAuthListener = new FirebaseAuth.AuthStateListener()
-        {
+        myAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth)
-            {
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 //if a user is not signed in
-                if(firebaseAuth.getCurrentUser() == null)
-                {
+                if (firebaseAuth.getCurrentUser() == null) {
                     //go to login activity
-                    startActivity(new Intent(HomeActivity.this,LoginActivity.class));
+                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
                 }
             }
         };
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-
-        //Alarm ------------------------------------------------
-        Calendar calendarAlarm = Calendar.getInstance();
-
-        calendarAlarm.set(Calendar.HOUR_OF_DAY,19);
-        calendarAlarm.set(Calendar.MINUTE,05);
-        calendarAlarm.set(Calendar.SECOND,30);
-
-        Intent alarmIntent = new Intent(getApplicationContext(), Notification_receiver.class);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),100,alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-
-        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, calendarAlarm.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-
-        //Alarm ------------------------------------------------
-
-
-    }
-
-
-    @Override
-    protected void onStart()//on start
-    {
-        super.onStart();//on supers start
-
-        //add myAuthListener to myAuth
-        myAuth.addAuthStateListener(myAuthListener);
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
         }
-    }
+        mFusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            curLat = location.getLatitude();
+                            curLong = location.getLongitude();
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
-    }
+                        }
+                    }
+                });
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        else if(id == R.id.action_signOut)
-        {
-            //sign out the current user
-            FirebaseAuth.getInstance().signOut();
-            return true;
-        }
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        //code to access the arduino controls activity goes here Jack
-        if (id == R.id.home_controls) {
-            Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.integreight.onesheeld");
-            try {
-                startActivity(launchIntent);
-            }catch (Exception e){
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.integreight.onesheeld")));
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                submitPost();
             }
-        }
+        }, 5000);
 
-        //code to access the weather activity goes here Shane
-        else if (id == R.id.weather) {
-            Intent weatherIntent = new Intent(this, WeatherActivity.class);
-            startActivity(weatherIntent);
-        }
+        timer = new CountDownTimer(60000, 20) {
 
-        //code to go to the calendar activity goes here Darragh
-        else if (id == R.id.calendar) {
+            @Override
+            public void onTick(long millisUntilFinished) {
 
-        }
+            }
 
-        // code to access the geofence activity goes here Jack
-        else if(id == R.id.geofence){
-            Intent intent = new Intent(this, GeoMainActivity.class);
-            startActivity(intent);
-        }
+            @Override
+            public void onFinish() {
+                try{
+                    submitPost();
+                }catch(Exception e){
+                    Log.e("Error", "Error: " + e.toString());
+                }
+            }
+        };
+    }
 
-        //Shane add the code to go to the music player activity here
-        else if (id == R.id.music) {
-            Intent intent = new Intent(this, MusicActivity.class);
-            startActivity(intent);
-        }
+    private void submitPost() {
 
-        //Playback of Time
-        else if (id == R.id.time) {
-            Intent intent = new Intent(this, TimeActivity.class);
-            startActivity(intent);
-        }
+        final String userId = "-KySdfqhHypaTuGyNR0r";
+        mDatabase.child("patients").child(userId).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
-        //Playback of Time
-        else if (id == R.id.tweet) {
-            Intent intent = new Intent(this, TwitterActivity.class);
-            startActivity(intent);
-        }
+                        User user = dataSnapshot.getValue(User.class);
 
-        //Darragh Add the code to go to your activity here for the memory game.
-        else if (id == R.id.game) {
-            Intent intent = new Intent(this, GameActivity.class);
-            startActivity(intent);
-        }
+                        if (user == null) {
+                            // User is null, error out
 
+                            Toast.makeText(HomeActivity.this,
+                                    "Error: could not fetch user.",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            timer.start();
+                            writeNewPost(user.firebaseID, user.fName, user.lName, user.GeoLongitude, user.GeoLatitude, userId,
+                                    user.longitude, user.latitude, user.address, user.email, user.password, user.phone);
+                            Toast.makeText(HomeActivity.this, "Posted", Toast.LENGTH_SHORT);
+                        }
+                    }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
+    private void writeNewPost(String fireBaseID, String fName, String lName, double GeoLongitude, double GeoLatitude, String key, double longitude, double latitude,
+                              String address, String email, String password, String phone){
+        //String key = mDatabase.child("patients").push().getKey();
+
+        UserInformation user = new UserInformation(fireBaseID, fName, lName, GeoLongitude, GeoLatitude, key, curLong, curLat, address, email, password, phone);
+        Map<String, Object> postValues = user.toMap();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/patients/" + key, postValues);
+
+        // childUpdates.put("/patients/" + userId + "/" + key, postValues);
+
+        mDatabase.updateChildren(childUpdates);
     }
 }

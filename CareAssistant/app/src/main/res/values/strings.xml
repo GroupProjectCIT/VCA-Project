@@ -41,4 +41,18 @@
         functionality.</string>
     <string name="settings">Settings</string>
 
+    <string-array name="listItems">
+        <item>Lights and Heating</item>
+        <item>Weather</item>
+        <item>Appointments</item>
+        <item>Geo Fence</item>
+        <item>Play Music</item>
+        <item>Play Time</item>
+        <item>Post Location</item>
+        <item>Memory Game</item>
+        <item>Test</item>
+
+
+    </string-array>
+
 </resources>
