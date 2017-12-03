@@ -1,5 +1,7 @@
 package com.example.android.careassistant;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -30,6 +32,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,6 +71,7 @@ public class HomeActivity extends AppCompatActivity {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         listView = (ListView) findViewById(R.id.listView);
 
+
         ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(HomeActivity.this,
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.listItems));
@@ -92,6 +96,9 @@ public class HomeActivity extends AppCompatActivity {
                     //startActivity(intent);
                 } else if (listView.getItemAtPosition(i).toString().equalsIgnoreCase("Weather")) {
                     Intent intent = new Intent(HomeActivity.this, WeatherActivity.class);
+                    startActivity(intent);
+                } else if (listView.getItemAtPosition(i).toString().equalsIgnoreCase("Reminder")) {
+                    Intent intent = new Intent(HomeActivity.this, NotificationActivity.class);
                     startActivity(intent);
                 } else if (listView.getItemAtPosition(i).toString().equalsIgnoreCase("Play Time")) {
                     Intent intent = new Intent(HomeActivity.this, TimeActivity.class);

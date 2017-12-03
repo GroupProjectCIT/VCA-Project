@@ -28,6 +28,9 @@
         <item
             android:id="@+id/game"
             android:title="Memory Game" />
+        <item
+            android:id="@+id/notification"
+            android:title="Reminder" />
 
     </group>
 

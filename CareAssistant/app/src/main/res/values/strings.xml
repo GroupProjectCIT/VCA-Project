@@ -50,6 +50,7 @@
         <item>Play Time</item>
         <item>Post Location</item>
         <item>Memory Game</item>
+        <item>Reminder</item>
         <item>Order Takeaway </item>
         <item>Order Taxi</item>
     </string-array>
