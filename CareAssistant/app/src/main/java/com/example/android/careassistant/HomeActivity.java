@@ -29,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -102,6 +103,20 @@ public class HomeActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.integreight.onesheeld")));
                     }
+                } else if (listView.getItemAtPosition(i).toString().equalsIgnoreCase("Order Takeaway")) {
+                    Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.justeat.app.ie");
+                    try {
+                        startActivity(launchIntent);
+                    } catch (Exception e) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.justeat.app.ie")));
+                    }
+                } else if (listView.getItemAtPosition(i).toString().equalsIgnoreCase("Order Taxi")) {
+                    Intent launchIntent = getPackageManager().getLaunchIntentForPackage("taxi.android.client");
+                    try {
+                        startActivity(launchIntent);
+                    } catch (Exception e) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=taxi.android.client")));
+                    }
                 }
 
             }
@@ -122,71 +137,64 @@ public class HomeActivity extends AppCompatActivity {
             }
         };
 
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+        if (ActivityCompat.checkSelfPermission(HomeActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(HomeActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(HomeActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
+        }else {
+            mFusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            // Got last known location. In some rare situations this can be null.
+                            if (location != null) {
+                                curLat = location.getLatitude();
+                                curLong = location.getLongitude();
+
+                            }
+                        }
+                    });
+
+
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+
+            FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+            userID = currentFirebaseUser.getUid();
+
+
+            getPatient = new Handler();
+            getPatient.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Query query = mDatabase.child("patients").orderByChild("firebaseID").equalTo(userID);
+
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot patient : dataSnapshot.getChildren()) {
+                                String value = patient.getValue().toString();
+                                UserInformation user = patient.getValue(UserInformation.class);
+                                usersKey = patient.getKey();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }, 3000);
+
+
+            handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    submitPost();
+                }
+            }, 10000);
         }
-        mFusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // Got last known location. In some rare situations this can be null.
-                        if (location != null) {
-                            curLat = location.getLatitude();
-                            curLong = location.getLongitude();
-
-                        }
-                    }
-                });
-
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        userID = currentFirebaseUser.getUid();
-
-
-
-        getPatient = new Handler();
-        getPatient.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Query query =  mDatabase.child("patients").orderByChild("firebaseID").equalTo(userID);
-
-                query.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot patient : dataSnapshot.getChildren()) {
-                            String value = patient.getValue().toString();
-                            UserInformation user = patient.getValue(UserInformation.class);
-                            usersKey = patient.getKey();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-            }
-        }, 3000);
-
-
-
-        handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                submitPost();
-            }
-        }, 10000);
 
         timer = new CountDownTimer(60000, 20) {
 
@@ -197,9 +205,9 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                try{
+                try {
                     submitPost();
-                }catch(Exception e){
+                } catch (Exception e) {
                     Log.e("Error", "Error: " + e.toString());
                 }
             }
@@ -240,7 +248,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void writeNewPost(String fireBaseID, String fName, String lName, double GeoLongitude, double GeoLatitude, String key, double longitude, double latitude,
-                              String address, String email, String password, String phone){
+                              String address, String email, String password, String phone) {
         //String key = mDatabase.child("patients").push().getKey();
 
         UserInformation user = new UserInformation(fireBaseID, fName, lName, GeoLongitude, GeoLatitude, key, curLong, curLat, address, email, password, phone);

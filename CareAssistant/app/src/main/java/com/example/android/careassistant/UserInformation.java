@@ -56,8 +56,7 @@ public class UserInformation {
     }
 
     public UserInformation(String key, String fName, String lName, double GeoLongitude, double GeoLatitude,
-                           String fireBaseID)
-    {
+                           String fireBaseID) {
         this.uid = fireBaseID;
         this.fName = fName;
         this.GeoLatitude = GeoLatitude;
@@ -89,15 +88,15 @@ public class UserInformation {
     }
 
 
-    public void setGeoLatitude(double GeoLatitude){
+    public void setGeoLatitude(double GeoLatitude) {
         this.GeoLatitude = GeoLatitude;
     }
 
-    public double getGeoLongitude(){
+    public double getGeoLongitude() {
         return GeoLongitude;
     }
 
-    public void setGeoLongitude(double GeoLongitude){
+    public void setGeoLongitude(double GeoLongitude) {
         this.GeoLongitude = GeoLongitude;
     }
 }

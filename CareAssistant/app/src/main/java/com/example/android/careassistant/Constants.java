@@ -56,6 +56,6 @@ final class Constants {
         PATIENT_FENCE.put("Cork City", new LatLng(GeoMainActivity.getLatitude(), GeoMainActivity.getLongitude()));
 
         // Googleplex.
-       // PATIENT_FENCE.put("Cork", new LatLng(51.8969,-8.4863));
+        // PATIENT_FENCE.put("Cork", new LatLng(51.8969,-8.4863));
     }
 }

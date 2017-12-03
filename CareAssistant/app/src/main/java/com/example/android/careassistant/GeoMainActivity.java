@@ -66,7 +66,6 @@ public class GeoMainActivity extends AppCompatActivity implements OnCompleteList
     private String userID;
 
 
-
     public static double latitude, longitude;
 
     public static double getLatitude() {
@@ -119,13 +118,13 @@ public class GeoMainActivity extends AppCompatActivity implements OnCompleteList
         setContentView(R.layout.main_activity);
 
 
-        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userID = currentFirebaseUser.getUid();
 
         dataRef = FirebaseDatabase.getInstance().getReference();
         mRef = dataRef.child("patients");
 
-        Query query =  dataRef.child("patients").orderByChild("firebaseID").equalTo(userID);
+        Query query = dataRef.child("patients").orderByChild("firebaseID").equalTo(userID);
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -137,7 +136,7 @@ public class GeoMainActivity extends AppCompatActivity implements OnCompleteList
                     Double lon = user.getGeoLongitude();
                     setLatitude(lat);
                     setLongitude(lon);
-                    Toast.makeText(GeoMainActivity.this, "latitude: " + getLatitude() + " longitude: " + getLongitude() , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GeoMainActivity.this, "latitude: " + getLatitude() + " longitude: " + getLongitude(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -295,6 +294,7 @@ public class GeoMainActivity extends AppCompatActivity implements OnCompleteList
     /**
      * Runs when the result of calling {@link #addGeofences()} and/or {@link #removeGeofences()}
      * is available.
+     *
      * @param task the resulting Task, containing either a result or error.
      */
     @Override
@@ -537,9 +537,10 @@ public class GeoMainActivity extends AppCompatActivity implements OnCompleteList
 
     /**
      * customizable toast
+     *
      * @param message
      */
-    private void toastMessage(String message){
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    private void toastMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

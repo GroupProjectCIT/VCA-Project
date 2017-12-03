@@ -36,7 +36,7 @@ import java.util.List;
 
 /**
  * Listener for geofence transition changes.
- *
+ * <p>
  * Receives geofence transition events from Location Services in the form of an Intent containing
  * the transition type and geofence id(s) that triggered the transition. Creates a notification
  * as the output.
@@ -56,6 +56,7 @@ public class GeoFenceTransitionsAndIntents extends IntentService {
 
     /**
      * Handles incoming intents.
+     *
      * @param intent sent by Location Services. This Intent is provided to Location
      *               Services (inside a PendingIntent) when addGeofences() is called.
      */
@@ -95,9 +96,9 @@ public class GeoFenceTransitionsAndIntents extends IntentService {
     /**
      * Gets transition details and returns them as a formatted string.
      *
-     * @param geofenceTransition    The ID of the geofence transition.
-     * @param triggeringGeofences   The geofence(s) triggered.
-     * @return                      The transition details formatted as String.
+     * @param geofenceTransition  The ID of the geofence transition.
+     * @param triggeringGeofences The geofence(s) triggered.
+     * @return The transition details formatted as String.
      */
     private String getGeofenceTransitionDetails(
             int geofenceTransition,
@@ -110,7 +111,7 @@ public class GeoFenceTransitionsAndIntents extends IntentService {
         for (Geofence geofence : triggeringGeofences) {
             triggeringGeofencesIdsList.add(geofence.getRequestId());
         }
-        String triggeringGeofencesIdsString = TextUtils.join(", ",  triggeringGeofencesIdsList);
+        String triggeringGeofencesIdsString = TextUtils.join(", ", triggeringGeofencesIdsList);
 
         return geofenceTransitionString + ": " + triggeringGeofencesIdsString;
     }
@@ -164,8 +165,8 @@ public class GeoFenceTransitionsAndIntents extends IntentService {
     /**
      * Maps geofence transition types to their human-readable equivalents.
      *
-     * @param transitionType    A transition type constant defined in Geofence
-     * @return                  A String indicating the type of transition
+     * @param transitionType A transition type constant defined in Geofence
+     * @return A String indicating the type of transition
      */
     private String getTransitionString(int transitionType) {
         switch (transitionType) {
