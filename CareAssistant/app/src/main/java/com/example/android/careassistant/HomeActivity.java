@@ -88,8 +88,8 @@ public class HomeActivity extends AppCompatActivity {
                     Intent intent = new Intent(HomeActivity.this, GeoMainActivity.class);
                     startActivity(intent);
                 } else if (listView.getItemAtPosition(i).toString().equalsIgnoreCase("Appointments")) {
-                    //Intent intent = new Intent(HomeActivity.this, TwitterActivity.class);
-                    //startActivity(intent);
+                    Intent intent = new Intent(HomeActivity.this, AppActivity.class);
+                    startActivity(intent);
                 } else if (listView.getItemAtPosition(i).toString().equalsIgnoreCase("Weather")) {
                     Intent intent = new Intent(HomeActivity.this, WeatherActivity.class);
                     startActivity(intent);
