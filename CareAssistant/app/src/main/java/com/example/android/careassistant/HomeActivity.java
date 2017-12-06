@@ -1,7 +1,5 @@
 package com.example.android.careassistant;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -31,8 +29,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -125,6 +121,10 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=taxi.android.client")));
                     }
                 }
+                else if (listView.getItemAtPosition(i).toString().equalsIgnoreCase("Log Out")) {
+                    FirebaseAuth.getInstance().signOut();
+                }
+
 
             }
         });
@@ -219,6 +219,12 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         };
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        myAuth.addAuthStateListener(myAuthListener);
     }
 
     private void submitPost() {

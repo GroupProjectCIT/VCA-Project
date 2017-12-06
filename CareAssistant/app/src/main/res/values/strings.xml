@@ -53,6 +53,7 @@
         <item>Reminder</item>
         <item>Order Takeaway </item>
         <item>Order Taxi</item>
+        <item>Log Out</item>
     </string-array>
 
 </resources>
