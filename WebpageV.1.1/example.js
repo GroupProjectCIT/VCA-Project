@@ -12,22 +12,14 @@ angular
 
         }];
         vm.events = [
-            {
-                title: 'Susie Malone',
-                color: calendarConfig.colorTypes.warning,
-                startsAt: moment().startOf('week').subtract(-3, 'days').add(12, 'hours').toDate(),
-                endsAt: moment().startOf('week').add(1, 'week').add(13, 'hours').toDate(),
-                draggable: true,
-                resizable: true,
-                actions: actions
-            }
+
         ];
 
-        vm.cellIsOpen = true;
+        vm.cellIsOpen = false;
 
         vm.addEvent = function() {
             vm.events.push({
-                title: 'New event',
+                title: 'New Appointment',
                 startsAt: moment().startOf('day').toDate(),
                 endsAt: moment().endOf('day').toDate(),
                 color: calendarConfig.colorTypes.important,
