@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="VCA-STYLE.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 
@@ -30,7 +30,7 @@
                 <a href="VCA-Home.html">Home</a>
                 <a href="VCA-Location.html">Location</a>
                 <a href="VCA-PatientList.html">Patient List</a>
-                <a href="VCA-Account.html">Add Patient </a>
+                <a href="VCA-Account.html">Account</a>
                 <a><button id="logOutBtn" class="btn-link">Logout</button></a>
 
             </nav>
@@ -49,32 +49,6 @@
     <b>Shane Marshall</b><br> Email Address: <a href="s.marshall@mycit.ie">s.marshall@mycit.ie</a>
 </div>
 
-<div id="msgText">
-
-    <h2>Send Us A Message:</h2>
-    <div class="fName">
-        <label for="fName" class="required">First Name:</label>
-        <input type="text" placeholder="Enter your first name" name="fName" id="boxes" required title="Please enter your first name">
-    </div>
-    <div class="lName">
-        <label for="lName" class="required">Last Name:</label>
-        <input type="text" placeholder="Enter your last name" name="lName" id="boxes" required title="Please enter your last name">
-    </div>
-    <div class="email">
-        <label for="email" class="required">Email:</label>
-        <input type="text" placeholder="you@example.com" name="email" id="boxes" required>
-    </div>
-    <div class="subject">
-        <label for="subject" class="subject">Subject:</label>
-        <input type="text" name="subject" id="boxes" required>
-    </div>
-    <div class="message">
-        <label for="message">Your Message:</label>
-        <textarea name="message" id="message" rows="5" cols="30"></textarea>
-        <span id="message-count" class="hide"></span>
-    </div>
-    <div class="send"><input type="submit" value="Send"></div>
-</div>
 </fieldset>
 </div>
 
@@ -89,7 +63,7 @@
         <a href="VCA-Contact.html">Contact</a>
     </div>
 
-    <!-- <script src="VCA-JavaScript.js"></script> COMMENTED OUT AS NO NEED TO RUN SCRIPT ON THIS PAGE...Yet -->
+    <script src="VCA-JavaScript.js"></script>
 </footer>
 </body>
 </html>

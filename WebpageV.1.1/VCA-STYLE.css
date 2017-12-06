@@ -104,11 +104,11 @@ button#logOutBtn.btn-link:hover{
 
 footer
 {
-    position:absolute;
+    position:fixed;
     bottom:0%;
     left:0%;
     width:100%;
-    height:6vh;
+    height:10vh;
     background-color:#3377ff;
 }
 
@@ -200,25 +200,6 @@ footer a
 #selectedUserInfo
 {
 	position: absolute;
-	left: 15%;
-	top: 20%;
-	height:60%;
-    width:20%;
-	/*background-color:gray;*/
-}
-
-#deleteSelectedBtn
-{
-	Position:absolute;
-	right: 15%;
-	top: 25%;
-	 width:10%;
-	
-}
-
-#selectedUserInputs
-{
-	position: absolute;
 	left: 42%;
 	top: 20%;
 	height:60%;
@@ -226,21 +207,15 @@ footer a
 	/*background-color:gray;*/
 }
 
-#AddUserInfo
+#deleteSelectedBtb
 {
-	position: absolute;
-	left: 5%;
-	top: 25%;
-	width:20%;
+	Position:absolute;
+	left: 50%;
+	top: 2.5%;
+	
 }
 
-#updateTip
-{
-	position: absolute;
-	left: 15%;
-	top:50%;
-	width:15%;
-}
+
 
 /*---------DARRAGH'S CSS------------*/
 
@@ -273,7 +248,7 @@ footer a
 {
     position:absolute;
     top:25%;
-    left:10%;
+    left:40%;
     Width:300px;
     height:300px;
 }
@@ -300,14 +275,6 @@ footer a
     background-color: #009fff;
     color: #ffffff;
     cursor: pointer;}
-
-#btnCreateEvents {
-    left: 25%;
-}
-
-#divifm {
-    left: 25%;
-}
 
 /*-----------SHANE'S CSS------------*/
 
