@@ -24,7 +24,7 @@ public class TimeActivity extends AppCompatActivity {
 
 
     DateFormat timeFormat = new SimpleDateFormat("HH:mm");
-    DateFormat timeAndDateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+    DateFormat timeAndDateFormat = new SimpleDateFormat("HH:mm MM/dd/yyyy");
     String time;
     String timeAndDate;
 
