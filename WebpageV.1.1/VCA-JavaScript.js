@@ -268,15 +268,22 @@ function assistantAddPatient()
 var wLatitude;
 var wLongitude;
 var wQuery;
+var ouput;
 
 //Get latitude and longitude of user
 function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(generateQuery);
-    }
-	else {
-        document.getElementById("weather").innerHTML = "Geolocation is not supported by this browser.";
-    }
+	if (sessionStorage.getItem("sessionWeather") === null)
+	{
+		console.log("ADAWD");
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(generateQuery);
+		}
+		else {
+			document.getElementById("weather").innerHTML = "Geolocation is not supported by this browser.";
+		}
+	}
+	else
+		document.getElementById("weather").innerHTML = sessionStorage.getItem("sessionWeather");
 }
 
 //Generates the query for weather
@@ -290,7 +297,10 @@ function generateQuery(position) {
 //Displays current location, weather condition and temperature
 function displayWeather()
 {
+	
 	$.getJSON(wQuery, function( json ) {
-		document.getElementById("weather").innerHTML = json.location.name + "<br>" + json.current.condition.text + "<br>" + json.current.temp_c + "&#8451" ;
+		output = json.location.name + "<br>" + json.current.condition.text + "<br>" + json.current.temp_c + "&#8451" ;
+		sessionStorage.setItem("sessionWeather", output);
+		document.getElementById("weather").innerHTML = output;
  });
 }
