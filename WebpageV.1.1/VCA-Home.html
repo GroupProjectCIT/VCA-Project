@@ -1,19 +1,36 @@
 <!DOCTYPE html>
+<html ng-app="mwl.calendar.docs">
 
 <head>
     <title>
         VCA/HOME
     </title>
+    <meta charset='utf-8' />
     <link rel="stylesheet" type="text/css" href="VCA-STYLE.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad" type="text/javascript"></script>
+    <script src="https://unpkg.com/moment@2.17.1"></script>
+    <script src="https://unpkg.com/interactjs@1"></script>
+    <script src="https://unpkg.com/angular@1.6.4/angular.js"></script>
+    <script src="https://unpkg.com/angular-animate@1.6.4/angular-animate.js"></script>
+    <script src="https://unpkg.com/angular-ui-bootstrap@2/dist/ui-bootstrap-tpls.js"></script>
+    <script src="https://unpkg.com/rrule@2"></script>
+    <script src="https://unpkg.com/angular-bootstrap-colorpicker@3"></script>
+    <script src="https://unpkg.com/angular-bootstrap-calendar"></script>
+    <link href="https://unpkg.com/bootstrap@3/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="https://unpkg.com/angular-bootstrap-colorpicker@3/css/colorpicker.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css" rel="stylesheet">
+    <script src="example.js"></script>
+    <script src="helpers.js"></script>
 
 </head>
 
 <html>
 <body>
+
 
 <header class="clearfix">
     <div class="container">
@@ -29,31 +46,181 @@
                 <a href="VCA-Home.html">Home</a>
                 <a href="VCA-Location.html">Location</a>
                 <a href="VCA-PatientList.html">Patient List</a>
-                <a href="VCA-Account.html">Add Patient </a>
+                <a href="VCA-Account.html">Account</a>
                 <a><button id="logOutBtn" class="btn-link">Logout</button></a>
 
             </nav>
         </div>
     </div>
 	<!--Weather-->
-	<div id="weather"></div>
+    <div id="weather"></div>
 </header>
+<div ng-controller="KitchenSinkCtrl as vm">
+    <h2 class="text-center">{{ vm.calendarTitle }}</h2>
 
-<button id="btnCreateEvents" class="btn btn-primary" onclick="makeApiCall();">
-    Create Events</button>
+    <div class="row">
 
-<div id="divifm">
-    <iframe id="ifmCalendar"
+        <div class="col-md-6 text-center">
+            <div class="btn-group">
 
-            src="https://www.google.com/calendar/embed?
-                    height=550&amp;wkst=1&amp;bgcolor=%23FFFFFF&
-                    amp;src=24tn4fht2sssdssfdiqqlsedk%40group.calendar.google.com&
-                    amp;color=%238C500B&amp;ctz=Asia%2FCalcutta"
+                <button
+                        class="btn btn-primary"
+                        mwl-date-modifier
+                        date="vm.viewDate"
+                        decrement="vm.calendarView"
+                        ng-click="vm.cellIsOpen = false">
+                    Previous
+                </button>
+                <button
+                        class="btn btn-default"
+                        mwl-date-modifier
+                        date="vm.viewDate"
+                        set-to-today
+                        ng-click="vm.cellIsOpen = false">
+                    Today
+                </button>
+                <button
+                        class="btn btn-primary"
+                        mwl-date-modifier
+                        date="vm.viewDate"
+                        increment="vm.calendarView"
+                        ng-click="vm.cellIsOpen = false">
+                    Next
+                </button>
+            </div>
+        </div>
 
-            style="border-width: 0" width="950"
+        <br class="visible-xs visible-sm">
 
-            height="520" frameborder="0" scrolling="no">
-    </iframe>
+        <div class="col-md-6 text-center">
+            <div class="btn-group">
+                <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'year'" ng-click="vm.cellIsOpen = false">Year</label>
+                <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'month'" ng-click="vm.cellIsOpen = false">Month</label>
+                <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'week'" ng-click="vm.cellIsOpen = false">Week</label>
+                <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'day'" ng-click="vm.cellIsOpen = false">Day</label>
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+
+    <mwl-calendar
+            events="vm.events"
+            view="vm.calendarView"
+            view-title="vm.calendarTitle"
+            view-date="vm.viewDate"
+            on-event-click="vm.eventClicked(calendarEvent)"
+            on-event-times-changed="vm.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
+            cell-is-open="vm.cellIsOpen"
+            day-view-start="06:00"
+            day-view-end="22:59"
+            day-view-split="30"
+            cell-modifier="vm.modifyCell(calendarCell)"
+            cell-auto-open-disabled="true"
+            on-timespan-click="vm.timespanClicked(calendarDate, calendarCell)">
+    </mwl-calendar>
+
+    <br><br><br>
+
+    <h3 id="event-editor">
+        Edit events
+        <button
+                class="btn btn-primary pull-right"
+                ng-click="vm.addEvent()">
+            Add new
+        </button>
+        <div class="clearfix"></div>
+    </h3>
+
+    <table class="table table-bordered">
+
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Primary color</th>
+            <th>Starts at</th>
+            <th>Ends at</th>
+            <th>Remove</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="event in vm.events track by $index">
+            <td>
+                <input
+                        type="text"
+                        class="form-control"
+                        ng-model="event.title">
+            </td>
+            <td>
+                <input class="form-control" colorpicker type="text" ng-model="event.color.primary">
+            </td>
+            <td>
+                <p class="input-group" style="max-width: 250px">
+                    <input
+                            type="text"
+                            class="form-control"
+                            readonly
+                            uib-datepicker-popup="dd MMMM yyyy"
+                            ng-model="event.startsAt"
+                            is-open="event.startOpen"
+                            close-text="Close" >
+                    <span class="input-group-btn">
+              <button
+                      type="button"
+                      class="btn btn-default"
+                      ng-click="vm.toggle($event, 'startOpen', event)">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
+                </p>
+                <div
+                        uib-timepicker
+                        ng-model="event.startsAt"
+                        hour-step="1"
+                        minute-step="15"
+                        show-meridian="true">
+                </div>
+            </td>
+            <td>
+                <p class="input-group" style="max-width: 250px">
+                    <input
+                            type="text"
+                            class="form-control"
+                            readonly
+                            uib-datepicker-popup="dd MMMM yyyy"
+                            ng-model="event.endsAt"
+                            is-open="event.endOpen"
+                            close-text="Close">
+                    <span class="input-group-btn">
+              <button
+                      type="button"
+                      class="btn btn-default"
+                      ng-click="vm.toggle($event, 'endOpen', event)">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
+                </p>
+                <div
+                        uib-timepicker
+                        ng-model="event.endsAt"
+                        hour-step="1"
+                        minute-step="15"
+                        show-meridian="true">
+                </div>
+            </td>
+            <td>
+                <button
+                        class="btn btn-danger"
+                        ng-click="vm.events.splice($index, 1)">
+                    Delete
+                </button>
+            </td>
+        </tr>
+        </tbody>
+
+    </table><br><br><br>
 </div>
 
 <footer>
