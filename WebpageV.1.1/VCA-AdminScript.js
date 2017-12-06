@@ -176,7 +176,7 @@ function pullInput()
 		//if successful warn the user that they are logged in as the newly created user
 		if(user)
 		{
-			alert("New User Added Succesfully. WARNING you are now logged in as the newly created user.");
+			alert("New User Added Succesfully.");
 			//this reminds me that the patients should not be able to add new patients
 			//so we need another page for adding users that is only accesable to the assistants. I will make it later.
 		}
