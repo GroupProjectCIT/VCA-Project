@@ -11,14 +11,5 @@
         android:id="@+id/lstTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/playTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="140dp"
-        android:onClick="speakTime"
-        android:text="Play"
-        android:textAlignment="center" />
 
 </RelativeLayout>

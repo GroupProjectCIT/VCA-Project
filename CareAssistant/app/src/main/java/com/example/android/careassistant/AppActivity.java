@@ -17,9 +17,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class AppActivity extends AppCompatActivity {
-    TextToSpeech toSpeech;
-    int result;
-    String text;
     DbHelper dbHelper;
     ArrayAdapter<String> mAdapter;
     ListView lstTask;
@@ -30,17 +27,6 @@ public class AppActivity extends AppCompatActivity {
         dbHelper = new DbHelper(this);
         lstTask = (ListView)findViewById(R.id.lstTask);
         loadTaskList();
-
-        toSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if(status==TextToSpeech.SUCCESS) {
-                    result = toSpeech.setLanguage(Locale.US);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Feature is not supported", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     private void loadTaskList() {
@@ -94,17 +80,5 @@ public class AppActivity extends AppCompatActivity {
         loadTaskList();
     }
 
-    public void speakTime(View view) {
-        switch (view.getId()) {
-            case R.id.playTime:
-                if(result== TextToSpeech.LANG_MISSING_DATA || result==TextToSpeech.LANG_NOT_SUPPORTED) {
-                    Toast.makeText(getApplicationContext(), "Feature is not supported", Toast.LENGTH_SHORT).show();
-                } else {
-                    text = "You have " + lstTask;
-                    toSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
-                }
-                break;
-        }
-    }
 }
 
